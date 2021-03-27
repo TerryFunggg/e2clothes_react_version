@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_27_133618) do
+ActiveRecord::Schema.define(version: 2021_03_27_134151) do
 
   create_table "addresses", charset: "utf8mb4", force: :cascade do |t|
     t.string "city", null: false
@@ -28,6 +28,16 @@ ActiveRecord::Schema.define(version: 2021_03_27_133618) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["product_id"], name: "fk_rails_916f2a1419"
     t.index ["user_id"], name: "fk_rails_ea59a35211"
+  end
+
+  create_table "orders", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "pre_order_id", null: false
+    t.bigint "user_id", null: false
+    t.string "state", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["pre_order_id"], name: "index_orders_on_pre_order_id", unique: true
+    t.index ["user_id"], name: "fk_rails_f868b47f6a"
   end
 
   create_table "pre_order_products", charset: "utf8mb4", force: :cascade do |t|
@@ -129,6 +139,8 @@ ActiveRecord::Schema.define(version: 2021_03_27_133618) do
 
   add_foreign_key "carts", "products"
   add_foreign_key "carts", "users"
+  add_foreign_key "orders", "pre_orders"
+  add_foreign_key "orders", "users"
   add_foreign_key "pre_order_products", "pre_orders"
   add_foreign_key "pre_order_products", "products"
   add_foreign_key "pre_orders", "users"
