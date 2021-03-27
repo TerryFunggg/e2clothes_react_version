@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_27_132416) do
+ActiveRecord::Schema.define(version: 2021_03_27_132616) do
 
   create_table "addresses", charset: "utf8mb4", force: :cascade do |t|
     t.string "city", null: false
@@ -19,6 +19,13 @@ ActiveRecord::Schema.define(version: 2021_03_27_132416) do
     t.string "zip_code", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "carts", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_carts_on_user_id", unique: true
   end
 
   create_table "product_pictures", charset: "utf8mb4", force: :cascade do |t|
@@ -102,6 +109,7 @@ ActiveRecord::Schema.define(version: 2021_03_27_132416) do
     t.index ["user_name", "email", "phone"], name: "index_users_on_user_name_and_email_and_phone", unique: true
   end
 
+  add_foreign_key "carts", "users"
   add_foreign_key "product_pictures", "products"
   add_foreign_key "products", "shops"
   add_foreign_key "rates", "products"
