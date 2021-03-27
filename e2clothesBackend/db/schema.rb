@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_27_132616) do
+ActiveRecord::Schema.define(version: 2021_03_27_133415) do
 
   create_table "addresses", charset: "utf8mb4", force: :cascade do |t|
     t.string "city", null: false
@@ -28,6 +28,13 @@ ActiveRecord::Schema.define(version: 2021_03_27_132616) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["product_id"], name: "fk_rails_916f2a1419"
     t.index ["user_id"], name: "fk_rails_ea59a35211"
+  end
+
+  create_table "pre_orders", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "fk_rails_e135a3fa8d"
   end
 
   create_table "product_pictures", charset: "utf8mb4", force: :cascade do |t|
@@ -113,6 +120,7 @@ ActiveRecord::Schema.define(version: 2021_03_27_132616) do
 
   add_foreign_key "carts", "products"
   add_foreign_key "carts", "users"
+  add_foreign_key "pre_orders", "users"
   add_foreign_key "product_pictures", "products"
   add_foreign_key "products", "shops"
   add_foreign_key "rates", "products"
