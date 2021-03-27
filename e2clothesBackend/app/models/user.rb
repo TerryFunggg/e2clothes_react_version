@@ -26,4 +26,33 @@
 #  fk_rails_...  (address_id => addresses.id)
 #
 class User < ApplicationRecord
+  ROLES = [
+    BUYER = 'buyer'.freeze,
+    SELLER = 'seller'.freeze,
+    ADMIN = 'admin'.freeze
+  ].freeze
+
+  enum role: {
+    buyer: BUYER,
+    seller: SELLER,
+    admin: ADMIN
+  }
+
+  validates :first_name, :last_name, :phone, :password, :role, presence: true
+  validates :phone, uniqueness: true,
+                    length: { is: 8 },
+                    numericality: true
+
+  validates :password, length: {
+    in: 6..20,
+    wrong_length: 'must be a length between 6 and 20'
+  }
+  validates :email, uniqueness: true, format: {
+    with: URI::MailTo::EMAIL_REGEXP,
+    message: 'must be a valid email address'
+  }
+  validates :avatar, allow_blank: true, format: {
+    with: /\.gif|jpg|png/i,
+    message: 'must be a URL for GIF,JPG,PNG image'
+  }
 end

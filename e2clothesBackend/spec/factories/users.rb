@@ -25,16 +25,17 @@
 #
 #  fk_rails_...  (address_id => addresses.id)
 #
+require 'faker'
+
 FactoryBot.define do
   factory :user do
-    first_name { "MyString" }
-    last_name { "MyString" }
-    email { "MyString" }
-    password { "MyString" }
-    avatar { "MyString" }
-    phone { "MyString" }
-    is_active { "MyString" }
-    role { "MyString" }
-    address_id { "" }
+    user_name { Faker::FunnyName.name }
+    first_name { Faker::Name.first_name }
+    last_name { Faker::Name.last_name }
+    email { Faker::Internet.email }
+    is_active { true }
+    password { Faker::Internet.password(min_length: 8) }
+    phone { Faker::Number.number(digits: 8) }
+    role { %w[buyer seller admin].sample }
   end
 end
