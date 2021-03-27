@@ -5,14 +5,17 @@
 #  id         :bigint           not null, primary key
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  product_id :bigint           not null
 #  user_id    :bigint           not null
 #
 # Indexes
 #
-#  index_carts_on_user_id  (user_id) UNIQUE
+#  fk_rails_916f2a1419  (product_id)
+#  fk_rails_ea59a35211  (user_id)
 #
 # Foreign Keys
 #
+#  fk_rails_...  (product_id => products.id)
 #  fk_rails_...  (user_id => users.id)
 #
 FactoryBot.define do
