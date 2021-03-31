@@ -25,12 +25,12 @@
 #
 FactoryBot.define do
   factory :shop do
-    address_id { "" }
-    user_id { "" }
-    logo { "MyString" }
-    title { "MyString" }
-    slug { "MyString" }
-    description { "MyString" }
-    state { "MyString" }
+    address_id { [1, 2, 3].sample }
+    user_id { [1, 2, 3].sample }
+    logo { Faker::Company.logo }
+    title { Faker::Company.name }
+    slug { Faker::Name.first_name }
+    description { Faker::Lorem.paragraph }
+    state { %w[unqualified open close].sample }
   end
 end

@@ -24,4 +24,24 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Shop < ApplicationRecord
+  belongs_to :user
+  belongs_to :address
+  validates :title, :state, presence: true
+
+  STATE = [
+    UNQUALIFIED = 'UNQUALIFIED'.freeze,
+    IS_OPEN = 'IS_OPEN'.freeze,
+    IS_CLOSE = 'IS_CLOSE'.freeze
+  ].freeze
+
+  enum state: {
+    unqualified: UNQUALIFIED,
+    is_open: IS_OPEN,
+    is_close: IS_CLOSE
+  }
+
+  validates :logo, allow_blank: true, format: {
+    with: /\.gif|jpg|png/i,
+    message: 'must be a URL for GIF,JPG,PNG image'
+  }
 end
