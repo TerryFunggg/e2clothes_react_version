@@ -36,6 +36,8 @@ RSpec.describe Shop, type: :model do
   end
   describe '#valid?' do
     it 'is valid when shop created' do
+      shop = create_shop
+      expect(shop).to be_valid
     end
 
     it 'is invalid when title is blank' do
