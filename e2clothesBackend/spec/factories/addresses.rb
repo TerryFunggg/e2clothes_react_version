@@ -10,11 +10,13 @@
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #
+require 'faker'
+
 FactoryBot.define do
   factory :address do
-    city { "MyString" }
-    street_address { "MyString" }
-    building_address { "MyString" }
-    zip_code { "MyString" }
+    city { Faker::Address.city }
+    street_address { Faker::Address.street_address }
+    building_address { Faker::Address.building_number }
+    zip_code { SecureRandom.hex(5) }
   end
 end

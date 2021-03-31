@@ -13,5 +13,34 @@
 require 'rails_helper'
 
 RSpec.describe Address, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '#valid?' do
+    it 'is valid when address created' do
+      address = create(:address)
+      expect(address).to be_valid
+    end
+
+    it 'is invalid when zip code is blank' do
+      address = create(:address)
+      address.zip_code = ''
+      expect(address).to be_invalid
+    end
+
+    it 'is invalid when street address is blank' do
+      address = create(:address)
+      address.street_address = ''
+      expect(address).to be_invalid
+    end
+
+    it 'is invalid when city is blank' do
+      address = create(:address)
+      address.city = ''
+      expect(address).to be_invalid
+    end
+
+    it 'is invalid when building address is blank' do
+      address = create(:address)
+      address.building_address = ''
+      expect(address).to be_invalid
+    end
+  end
 end
