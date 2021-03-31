@@ -150,4 +150,19 @@ RSpec.describe User, type: :model do
       expect(user).to be_invalid
     end
   end
+  describe '#save' do
+    it 'downcase the email correctly' do
+      user = create(:user)
+      user2 = create(:user)
+
+      user.email = 'tesT@gmail.com'
+      user.save
+
+      user2.email = 'JustForTesting@gmail.com'
+      user2.save
+
+      expect(user.email).to eq 'test@gmail.com'
+      expect(user2.email).to eq 'justfortesting@gmail.com'
+    end
+  end
 end
