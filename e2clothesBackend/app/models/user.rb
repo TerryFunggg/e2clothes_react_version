@@ -55,4 +55,12 @@ class User < ApplicationRecord
     with: /\.gif|jpg|png/i,
     message: 'must be a URL for GIF,JPG,PNG image'
   }
+
+  before_save :ensure_email_downcase
+
+  private
+
+  def ensure_email_downcase
+    self.email = email.downcase
+  end
 end
