@@ -17,4 +17,12 @@
 #  fk_rails_...  (shop_id => shops.id)
 #
 class ShopStuff < ApplicationRecord
+  belongs_to :shop
+
+  validates :file, presence: true
+
+  validates :file, allow_blank: true, format: {
+    with: /\.pdf/i,
+    message: 'must be a pdf file'
+  }
 end
