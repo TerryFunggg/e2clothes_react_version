@@ -11,4 +11,5 @@
 #  updated_at       :datetime         not null
 #
 class Address < ApplicationRecord
+  validates :city, :building_address, :street_address, :zip_code, presence: true
 end
