@@ -3,12 +3,11 @@
 # Table name: products
 #
 #  id         :bigint           not null, primary key
-#  category   :string(255)
 #  decription :text(65535)
+#  is_active  :boolean          default(TRUE), not null
 #  name       :string(255)      not null
 #  price      :string(255)      not null
 #  quality    :bigint           default(0)
-#  state      :string(255)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  shop_id    :bigint           not null
@@ -25,5 +24,15 @@
 require 'rails_helper'
 
 RSpec.describe Product, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  def create_shop(title: 'test title')
+    Shop.create(
+      user: create(:user),
+      address: create(:address),
+      title: title,
+      state: Shop::UNQUALIFIED
+    )
+  end
+
+  describe '#valid?' do
+  end
 end

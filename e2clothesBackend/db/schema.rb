@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_27_134151) do
+ActiveRecord::Schema.define(version: 2021_04_02_021539) do
 
   create_table "addresses", charset: "utf8mb4", force: :cascade do |t|
     t.string "city", null: false
@@ -71,8 +71,7 @@ ActiveRecord::Schema.define(version: 2021_03_27_134151) do
     t.string "price", null: false
     t.text "decription"
     t.bigint "quality", default: 0
-    t.string "category"
-    t.string "state"
+    t.boolean "is_active", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_products_on_name", unique: true
