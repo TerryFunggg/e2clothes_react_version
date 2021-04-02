@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_02_021539) do
+ActiveRecord::Schema.define(version: 2021_04_02_045918) do
 
   create_table "addresses", charset: "utf8mb4", force: :cascade do |t|
     t.string "city", null: false
@@ -28,6 +28,13 @@ ActiveRecord::Schema.define(version: 2021_04_02_021539) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["product_id"], name: "fk_rails_916f2a1419"
     t.index ["user_id"], name: "fk_rails_ea59a35211"
+  end
+
+  create_table "categories", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "product_id"
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "orders", charset: "utf8mb4", force: :cascade do |t|
