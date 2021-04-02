@@ -22,4 +22,8 @@
 #  fk_rails_...  (shop_id => shops.id)
 #
 class Product < ApplicationRecord
+  belongs_to :shop
+
+  validates :name, :price, presence: true
+  validates :price, numericality: true
 end
