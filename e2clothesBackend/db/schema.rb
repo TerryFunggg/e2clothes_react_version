@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_05_040324) do
+ActiveRecord::Schema.define(version: 2021_04_05_053834) do
 
   create_table "addresses", charset: "utf8mb4", force: :cascade do |t|
     t.string "city", null: false
@@ -56,12 +56,10 @@ ActiveRecord::Schema.define(version: 2021_04_05_040324) do
 
   create_table "orders", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "order_log_id", null: false
-    t.bigint "user_id", null: false
     t.string "state", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["order_log_id"], name: "index_orders_on_order_log_id", unique: true
-    t.index ["user_id"], name: "fk_rails_f868b47f6a"
   end
 
   create_table "product_pictures", charset: "utf8mb4", force: :cascade do |t|
@@ -150,7 +148,6 @@ ActiveRecord::Schema.define(version: 2021_04_05_040324) do
   add_foreign_key "order_products", "order_logs"
   add_foreign_key "order_products", "products"
   add_foreign_key "orders", "order_logs"
-  add_foreign_key "orders", "users"
   add_foreign_key "product_pictures", "products"
   add_foreign_key "products", "shops"
   add_foreign_key "rates", "products"
