@@ -26,6 +26,15 @@
 #  fk_rails_...  (address_id => addresses.id)
 #
 class User < ApplicationRecord
+  belongs_to :address, optional: true
+  has_many :carts
+  has_many :cart_items,
+           class_name: 'Product',
+           through: :carts,
+           source: :product
+  has_one :shop
+  has_many :orders
+
   ROLES = [
     BUYER = 'buyer'.freeze,
     SELLER = 'seller'.freeze,
