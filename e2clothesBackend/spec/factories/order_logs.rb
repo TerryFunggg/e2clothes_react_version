@@ -18,7 +18,7 @@
 #
 FactoryBot.define do
   factory :order_log do
-    user_id { nil }
-    order_code { "MyString" }
+    user factory: :user
+    order_code { 'sdasAsfas' }
   end
 end
