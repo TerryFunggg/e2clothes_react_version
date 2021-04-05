@@ -20,7 +20,7 @@
 #
 FactoryBot.define do
   factory :traffic do
-    user_id { "" }
-    product_id { "" }
+    user factory: :user
+    product factory: :product
   end
 end
