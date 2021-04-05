@@ -19,8 +19,8 @@
 #
 FactoryBot.define do
   factory :product_picture do
-    product_id { "" }
-    img { "MyString" }
-    index { "" }
+    product factory: :product
+    img { 'MyString' }
+    index { 0 }
   end
 end

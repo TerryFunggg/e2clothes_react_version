@@ -18,7 +18,7 @@
 #
 FactoryBot.define do
   factory :shop_stuff do
-    file { "MyString" }
-    shop_id { "" }
+    file { 'MyString' }
+    shop factory: :shop
   end
 end
