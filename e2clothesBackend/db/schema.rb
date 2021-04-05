@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_05_053834) do
+ActiveRecord::Schema.define(version: 2021_04_05_035850) do
 
   create_table "addresses", charset: "utf8mb4", force: :cascade do |t|
     t.string "city", null: false
@@ -37,29 +37,21 @@ ActiveRecord::Schema.define(version: 2021_04_05_053834) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "order_logs", charset: "utf8mb4", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.string "order_code"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_order_logs_on_user_id"
-  end
-
   create_table "order_products", charset: "utf8mb4", force: :cascade do |t|
-    t.bigint "order_log_id", null: false
+    t.bigint "order_id", null: false
     t.bigint "product_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["order_log_id"], name: "index_order_products_on_order_log_id"
+    t.index ["order_id"], name: "index_order_products_on_order_id"
     t.index ["product_id"], name: "index_order_products_on_product_id"
   end
 
   create_table "orders", charset: "utf8mb4", force: :cascade do |t|
-    t.bigint "order_log_id", null: false
+    t.bigint "user_id", null: false
     t.string "state", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["order_log_id"], name: "index_orders_on_order_log_id", unique: true
+    t.index ["user_id"], name: "fk_rails_f868b47f6a"
   end
 
   create_table "product_pictures", charset: "utf8mb4", force: :cascade do |t|
@@ -144,10 +136,9 @@ ActiveRecord::Schema.define(version: 2021_04_05_053834) do
 
   add_foreign_key "carts", "products"
   add_foreign_key "carts", "users"
-  add_foreign_key "order_logs", "users"
-  add_foreign_key "order_products", "order_logs"
+  add_foreign_key "order_products", "orders"
   add_foreign_key "order_products", "products"
-  add_foreign_key "orders", "order_logs"
+  add_foreign_key "orders", "users"
   add_foreign_key "product_pictures", "products"
   add_foreign_key "products", "shops"
   add_foreign_key "rates", "products"

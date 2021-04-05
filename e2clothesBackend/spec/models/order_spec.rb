@@ -2,19 +2,19 @@
 #
 # Table name: orders
 #
-#  id           :bigint           not null, primary key
-#  state        :string(255)      not null
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  order_log_id :bigint           not null
+#  id         :bigint           not null, primary key
+#  state      :string(255)      not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  user_id    :bigint           not null
 #
 # Indexes
 #
-#  index_orders_on_order_log_id  (order_log_id) UNIQUE
+#  fk_rails_f868b47f6a  (user_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (order_log_id => order_logs.id)
+#  fk_rails_...  (user_id => users.id)
 #
 require 'rails_helper'
 
@@ -27,14 +27,14 @@ RSpec.describe Order, type: :model do
   end
 
   describe '#save' do
-    it 'belongs to order log' do
+    it 'belongs to user' do
       order = Order.new(
         state: Order::PROCESSING
       )
       order.save
       expect(order).not_to be_persisted
 
-      order.order_log = create(:order_log)
+      order.user = create(:user)
       order.save
       expect(order).to be_persisted
     end
