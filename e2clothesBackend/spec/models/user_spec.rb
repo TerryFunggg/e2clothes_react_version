@@ -149,6 +149,16 @@ RSpec.describe User, type: :model do
       user.role = nil
       expect(user).to be_invalid
     end
+
+    it 'is invalid when role is not included' do
+      user = create(:user)
+
+      user.role = ''
+      expect(user).to be_invalid
+
+      user.role = nil
+      expect(user).to be_invalid
+    end
   end
   describe '#save' do
     it 'downcase the email correctly' do
@@ -163,6 +173,42 @@ RSpec.describe User, type: :model do
 
       expect(user.email).to eq 'test@gmail.com'
       expect(user2.email).to eq 'justfortesting@gmail.com'
+    end
+  end
+
+  describe '#associations' do
+    it 'have many cart items' do
+      user = create(:user)
+      product1 = create(:product, name: 'prodcut 1')
+      product2 = create(:product, name: 'product 2')
+
+      Cart.create(
+        user: user,
+        product: product1
+      )
+      Cart.create(
+        user: user,
+        product: product2
+      )
+
+      expect(user.cart_items).to include(product1, product2)
+    end
+
+    it 'have many orders' do
+      user = create(:user)
+      product1 = create(:order)
+      product2 = create(:order)
+
+      Cart.create(
+        user: user,
+        product: product1
+      )
+      Cart.create(
+        user: user,
+        product: product2
+      )
+
+      expect(user.cart_items).to include(product1, product2)
     end
   end
 end
