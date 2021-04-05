@@ -20,4 +20,12 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Rate < ApplicationRecord
+  belongs_to :product
+  belongs_to :user
+
+  # validates :rate, presence: true
+  validates :rate, numericality: {
+    only_integer: true,
+    less_than: 6
+  }
 end
