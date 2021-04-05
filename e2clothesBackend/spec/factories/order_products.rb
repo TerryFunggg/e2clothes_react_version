@@ -20,7 +20,7 @@
 #
 FactoryBot.define do
   factory :order_product do
-    order_log { nil }
-    product { nil }
+    order_log factory: :order_log
+    product factory: :product
   end
 end
