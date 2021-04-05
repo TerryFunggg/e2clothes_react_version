@@ -21,5 +21,25 @@
 require 'rails_helper'
 
 RSpec.describe Cart, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '#valid?' do
+    it 'is valid when cart created' do
+      cart = create(:cart)
+      expect(cart).to be_valid
+    end
+  end
+
+  describe '#save' do
+    it 'belongs to user, product' do
+      cart = Cart.new
+      cart.save
+      expect(cart).not_to be_persisted
+
+      user = create(:user)
+      product = create(:product)
+      cart.user = user
+      cart.product = product
+      cart.save
+      expect(cart).to be_persisted
+    end
+  end
 end

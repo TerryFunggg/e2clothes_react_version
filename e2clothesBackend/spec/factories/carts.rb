@@ -20,6 +20,7 @@
 #
 FactoryBot.define do
   factory :cart do
-    user_id { "" }
+    user factory: :user
+    product factory: :product
   end
 end
