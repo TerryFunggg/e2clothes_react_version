@@ -1,25 +1,26 @@
 # == Schema Information
 #
-# Table name: pre_order_products
+# Table name: order_products
 #
 #  id           :bigint           not null, primary key
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
-#  pre_order_id :bigint           not null
+#  order_log_id :bigint           not null
 #  product_id   :bigint           not null
 #
 # Indexes
 #
-#  fk_rails_285dd5bffe  (pre_order_id)
-#  fk_rails_dabeb957a7  (product_id)
+#  index_order_products_on_order_log_id  (order_log_id)
+#  index_order_products_on_product_id    (product_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (pre_order_id => pre_orders.id)
+#  fk_rails_...  (order_log_id => order_logs.id)
 #  fk_rails_...  (product_id => products.id)
 #
 FactoryBot.define do
-  factory :pre_order_product do
-    product_id { "" }
+  factory :order_product do
+    order_log { nil }
+    product { nil }
   end
 end

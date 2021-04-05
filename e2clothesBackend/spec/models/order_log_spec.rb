@@ -1,22 +1,23 @@
 # == Schema Information
 #
-# Table name: pre_orders
+# Table name: order_logs
 #
 #  id         :bigint           not null, primary key
+#  order_code :string(255)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  user_id    :bigint           not null
 #
 # Indexes
 #
-#  fk_rails_e135a3fa8d  (user_id)
+#  index_order_logs_on_user_id  (user_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (user_id => users.id)
 #
-FactoryBot.define do
-  factory :pre_order do
-    user_id { "" }
-  end
+require 'rails_helper'
+
+RSpec.describe OrderLog, type: :model do
+  pending "add some examples to (or delete) #{__FILE__}"
 end
