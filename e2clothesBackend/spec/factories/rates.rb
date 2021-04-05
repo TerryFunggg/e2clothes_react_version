@@ -21,8 +21,8 @@
 #
 FactoryBot.define do
   factory :rate do
-    user_id { "" }
-    product_id { "" }
-    rate { 1 }
+    user factory: :user
+    product factory: :product
+    rate { rand(0..5) }
   end
 end

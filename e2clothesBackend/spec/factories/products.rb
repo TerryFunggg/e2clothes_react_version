@@ -23,12 +23,11 @@
 #
 FactoryBot.define do
   factory :product do
-    shop_id { "" }
-    name { "MyString" }
-    price { "MyString" }
-    decription { "MyText" }
-    quality { "MyString" }
-    category { "MyString" }
-    state { "MyString" }
+    shop factory: :shop
+    name { 'myProduct' }
+    price { ['21.0', '33.1', '40.1'].sample }
+    decription { 'MyText' }
+    quality { '1' }
+    is_active { true }
   end
 end

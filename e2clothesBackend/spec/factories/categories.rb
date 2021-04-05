@@ -10,7 +10,7 @@
 #
 FactoryBot.define do
   factory :category do
-    product_id { "" }
-    name { "MyString" }
+    product factory: :product
+    name { 'test' }
   end
 end
