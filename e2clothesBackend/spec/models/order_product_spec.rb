@@ -27,18 +27,42 @@ RSpec.describe OrderProduct, type: :model do
       op = create(:order_product)
       expect(op).to be_valid
     end
+
+    it 'is invalid when price is not a number ' do
+      op = create(:order_product)
+      op.price = 'abc'
+      expect(op).to be_invalid
+
+      op.price = '123abc'
+      expect(op).to be_invalid
+
+      op.price = '123.abc'
+      expect(op).to be_invalid
+
+      op.price = '12.2'
+      expect(op).to be_valid
+
+      op.price = '10'
+      expect(op).to be_valid
+    end
   end
 
   describe '#save' do
-    it 'belongs to log and product' do
-      op = OrderProduct.new
+    it 'belongs to order and product' do
+      op = OrderProduct.new(
+        order: create(:order),
+        product: create(:product, name: 'product item 1'),
+        price: '10'
+      )
+      op.product = nil
+      op.order = nil
       op.save
       expect(op).not_to be_persisted
 
       product = create(:product)
       op.product = product
-      order_log = create(:order_log)
-      op.order_log = order_log
+      order = create(:order)
+      op.order = order
       op.save
       expect(op).to be_persisted
     end

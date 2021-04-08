@@ -21,7 +21,8 @@
 #
 FactoryBot.define do
   factory :order_product do
-    order_log factory: :order_log
+    order factory: :order
     product factory: :product
+    price { ['12', '10.0', '2.2'].sample }
   end
 end
