@@ -41,5 +41,10 @@ class Order < ApplicationRecord
     processing: PROCESSING
   }
 
-  validates :state, presence: true
+  validates :name, :phone, :state, presence: true
+  validates :city, :building_address, :street_address, :zip_code, presence: true
+  validates :email, format: {
+    with: URI::MailTo::EMAIL_REGEXP,
+    message: 'must be a valid email address'
+  }
 end
