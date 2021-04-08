@@ -194,21 +194,17 @@ RSpec.describe User, type: :model do
       expect(user.cart_items).to include(product1, product2)
     end
 
-    it 'have many orders' do
+    it 'have one shop or nil' do
       user = create(:user)
-      product1 = create(:order)
-      product2 = create(:order)
+      shop = create(:shop, user: user)
+      expect(user.shop).to eq(shop)
+    end
 
-      Cart.create(
-        user: user,
-        product: product1
-      )
-      Cart.create(
-        user: user,
-        product: product2
-      )
-
-      expect(user.cart_items).to include(product1, product2)
+    it 'have many order' do
+      user = create(:user)
+      order1 = create(:order, user: user)
+      order2 = create(:order, user: user)
+      expect(user.orders).to include(order1, order2)
     end
   end
 end
