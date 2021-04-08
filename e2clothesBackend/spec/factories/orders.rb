@@ -28,5 +28,12 @@ FactoryBot.define do
   factory :order do
     user factory: :user
     state { %w[complete canceled failed processing].sample }
+    name { Faker::FunnyName.name }
+    email { Faker::Internet.email }
+    phone { Faker::Number.number(digits: 8) }
+    city { Faker::Address.city }
+    street_address { Faker::Address.street_address }
+    building_address { Faker::Address.building_number }
+    zip_code { SecureRandom.hex(5) }
   end
 end
