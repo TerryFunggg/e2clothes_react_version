@@ -49,6 +49,14 @@ ActiveRecord::Schema.define(version: 2021_04_05_035850) do
   create_table "orders", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "state", null: false
+    t.string "name", null: false
+    t.string "city", null: false
+    t.string "street_address", null: false
+    t.string "building_address", null: false
+    t.string "zip_code", null: false
+    t.string "phone", null: false
+    t.string "email", null: false
+    t.string "code"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "fk_rails_f868b47f6a"
