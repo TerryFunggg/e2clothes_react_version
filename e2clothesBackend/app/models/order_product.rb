@@ -3,6 +3,7 @@
 # Table name: order_products
 #
 #  id         :bigint           not null, primary key
+#  price      :string(255)      not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  order_id   :bigint           not null
