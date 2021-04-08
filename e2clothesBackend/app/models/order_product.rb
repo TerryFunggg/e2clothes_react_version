@@ -20,6 +20,8 @@
 #  fk_rails_...  (product_id => products.id)
 #
 class OrderProduct < ApplicationRecord
-  belongs_to :order_log
+  belongs_to :order
   belongs_to :product
+
+  validates :price, numericality: true
 end
