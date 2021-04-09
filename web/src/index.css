@@ -6,3 +6,7 @@
 .nav-icon{
     @apply inline-block mx-2 h-6 w-6 cursor-pointer;
 }
+
+.nav-btn {
+    @apply hover:text-gray-500 transition duration-150 ease-in-out focus:outline-none
+}

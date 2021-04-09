@@ -1,8 +1,11 @@
 import React, { useState, useEffect, Children } from "react";
 import { Link } from 'react-router-dom'
+import { Menu, Transition } from '@headlessui/react'
+
 
 import SearchBox from './components/SearchBox'
 import DropDownMenu from './components/DropDownMenu'
+import SignInButton from './components/SignInButton'
 
 const NavBar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -50,8 +53,8 @@ const NavBar = ({ children }) => {
         </div>
 
         <div className="hidden md:block">
-          <a className="p-4" href="">Login</a>
-          <a className="p-4" href="">SigUp</a>
+          <a className="p-4 nav-btn" href="">Login</a>
+          <SignInButton />
         </div>
       </nav>
 
