@@ -134,7 +134,7 @@ ActiveRecord::Schema.define(version: 2021_04_05_035850) do
     t.string "password", null: false
     t.string "avatar"
     t.string "phone", null: false
-    t.string "is_active", null: false
+    t.boolean "is_active", null: false
     t.string "role", null: false
     t.bigint "address_id"
     t.datetime "created_at", precision: 6, null: false

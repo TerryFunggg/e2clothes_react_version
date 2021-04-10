@@ -8,7 +8,7 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.string :password, null: false
       t.string :avatar
       t.string :phone, null: false
-      t.string :is_active, null: false
+      t.boolean :is_active, null: false
       t.string :role, null: false
       t.bigint :address_id
 

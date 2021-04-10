@@ -6,7 +6,7 @@
 #  avatar     :string(255)
 #  email      :string(255)      not null
 #  first_name :string(255)      not null
-#  is_active  :string(255)      not null
+#  is_active  :boolean          not null
 #  last_name  :string(255)
 #  password   :string(255)      not null
 #  phone      :string(255)      not null
