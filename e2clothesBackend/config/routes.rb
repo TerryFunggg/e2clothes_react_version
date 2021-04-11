@@ -5,5 +5,6 @@ Rails.application.routes.draw do
   resource :api do
     resources :users
     resources :addresses
+    resources :carts
   end
 end
