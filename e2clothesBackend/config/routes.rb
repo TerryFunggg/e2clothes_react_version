@@ -3,10 +3,7 @@ Rails.application.routes.draw do
   post '/graphql', to: 'graphql#execute'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resource :api do
-    resources :users
-    resources :addresses
-    resources :carts
-    resources :categories
-    resources :orders
+    resources :users, :addresses, :carts, :categories,
+              :orders, :order_products
   end
 end
