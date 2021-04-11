@@ -5,6 +5,6 @@ Rails.application.routes.draw do
   resource :api do
     resources :users, :addresses, :carts, :categories,
               :orders, :order_products, :products, :product_pictures,
-              :rates
+              :rates, :shops
   end
 end
