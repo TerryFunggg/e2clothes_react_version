@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resource :api do
     resources :users, :addresses, :carts, :categories,
-              :orders, :order_products, :products, :product_pictures
+              :orders, :order_products, :products, :product_pictures,
+              :rates
   end
 end
