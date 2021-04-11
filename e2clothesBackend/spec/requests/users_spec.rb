@@ -45,18 +45,7 @@ RSpec.describe 'Users', type: :request do
 
   describe 'POST /users' do
     # valid payload
-    let(:valid_attr) do
-      {
-        first_name: 'Terry',
-        last_name: 'Fung',
-        user_name: 'terry12345',
-        password: 'avsadD1212d',
-        email: 'terry@gmail.com',
-        phone: '93456543',
-        is_active: true,
-        role: 'buyer'
-      }
-    end
+    let(:valid_attr) { JSON.parse(build(:user, first_name: 'Terry').to_json) }
 
     context 'when the record valid' do
       before { post '/api/users', params: valid_attr }
@@ -80,6 +69,36 @@ RSpec.describe 'Users', type: :request do
       it 'returns a validation failure message' do
         expect(response.body).to match(/Validation failed/)
       end
+    end
+  end
+
+  describe 'PUT /users/:id' do
+    let(:valid_attr) { { user_name: 'terryfung' } }
+    #   user = users.first
+    #   user.name
+
+    # end
+    context 'when the record exists' do
+      before { put "/api/users/#{user_id}", params: valid_attr }
+
+      it 'updates user record' do
+        expect(response.body).to be_empty
+      end
+
+      it 'updates status code 204' do
+        expect(response).to have_http_status(204)
+      end
+    end
+  end
+
+  describe 'DELETE users/:id' do
+    before do
+      user = create(:user)
+      delete "/api/users/#{user.id}"
+    end
+
+    it 'returns status code 204' do
+      expect(response).to have_http_status(204)
     end
   end
 end
