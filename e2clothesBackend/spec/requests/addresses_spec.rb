@@ -78,7 +78,7 @@ RSpec.describe 'Addresses', type: :request do
     context 'when the record exists' do
       before { put "/api/addresses/#{address_id}", params: valid_attr }
 
-      it 'updates user record' do
+      it 'updates a record' do
         expect(response.body).to be_empty
       end
 

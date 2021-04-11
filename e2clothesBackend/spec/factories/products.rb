@@ -21,10 +21,12 @@
 #
 #  fk_rails_...  (shop_id => shops.id)
 #
+require 'faker'
+
 FactoryBot.define do
   factory :product do
     shop factory: :shop
-    name { 'myProduct' }
+    name { Faker::FunnyName.name }
     price { ['21.0', '33.1', '40.1'].sample }
     decription { 'MyText' }
     quality { '1' }
