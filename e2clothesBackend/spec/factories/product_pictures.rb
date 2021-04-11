@@ -20,7 +20,7 @@
 FactoryBot.define do
   factory :product_picture do
     product factory: :product
-    img { 'MyString' }
+    img { 'mystring.jpg' }
     index { 0 }
   end
 end
