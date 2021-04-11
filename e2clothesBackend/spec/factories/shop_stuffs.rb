@@ -18,7 +18,7 @@
 #
 FactoryBot.define do
   factory :shop_stuff do
-    file { 'MyString' }
+    file { 'MyString.pdf' }
     shop factory: :shop
   end
 end
