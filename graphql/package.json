@@ -1,0 +1,23 @@
+{
+  "name": "e2clothes_graphql_gateway",
+  "version": "1.0.0",
+  "description": "try to implement a single data graph across multiple services",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.22.2",
+    "dotenv": "^8.2.0",
+    "graphql": "^15.5.0",
+    "graphql-import": "^1.0.2",
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
