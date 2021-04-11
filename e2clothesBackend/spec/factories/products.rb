@@ -26,7 +26,7 @@ require 'faker'
 FactoryBot.define do
   factory :product do
     shop factory: :shop
-    name { Faker::FunnyName.name }
+    name { Faker::Name.name }
     price { ['21.0', '33.1', '40.1'].sample }
     decription { 'MyText' }
     quality { '1' }
