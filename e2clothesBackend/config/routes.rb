@@ -7,5 +7,6 @@ Rails.application.routes.draw do
     resources :addresses
     resources :carts
     resources :categories
+    resources :orders
   end
 end
