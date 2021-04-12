@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { Menu, Dropdown, Button } from 'semantic-ui-react'
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { activeHome, activeMarket, selectNavItemActive } from '../reducers/navItemActive'
@@ -31,15 +32,13 @@ export default function NavBar() {
 
             <Menu.Menu position="right">
                 <Menu.Item>
-                    <Button>Login</Button>
+                    <Button style={{ marginRight: '1rem' }}>Login</Button>
+                    <Link to="signUp" >
+                        <Button color="blue">
+                            SignUp
+                    </Button>
+                    </Link>
                 </Menu.Item>
-
-                <Dropdown item text="SignIn">
-                    <Dropdown.Menu>
-                        <Dropdown.Item>As User</Dropdown.Item>
-                        <Dropdown.Item>As Shop</Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown>
             </Menu.Menu>
         </Menu>
     );
