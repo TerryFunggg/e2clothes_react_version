@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Menu, Dropdown, Button } from 'semantic-ui-react'
+import { useAppDispatch, useAppSelector } from '../hooks'
+import { activeHome, activeMarket, selectNavItemActive } from '../reducers/navItemActive'
 
 export default function NavBar() {
-    const [active, setActive] = useState('home');
-
-    const activeItem = (name: string) => setActive(name)
+    const active = useAppSelector(selectNavItemActive)
+    const dispatch = useAppDispatch();
 
     return (
         <Menu size='large' stackable style={{ marginBottom: '0' }} >
@@ -15,7 +16,7 @@ export default function NavBar() {
             <Menu.Item
                 name='home'
                 active={active === 'home'}
-                onClick={() => activeItem('home')}
+                onClick={() => dispatch(activeHome())}
             >
                 Home
             </Menu.Item>
@@ -23,7 +24,7 @@ export default function NavBar() {
             <Menu.Item
                 name='market'
                 active={active === 'market'}
-                onClick={() => activeItem('market')}
+                onClick={() => dispatch(activeMarket())}
             >
                 Market
             </Menu.Item>
