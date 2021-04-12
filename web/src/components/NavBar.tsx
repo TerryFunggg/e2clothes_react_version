@@ -7,7 +7,7 @@ export default function NavBar() {
     const activeItem = (name: string) => setActive(name)
 
     return (
-        <Menu size='large' stackable>
+        <Menu size='large' stackable style={{ marginBottom: '0' }} >
             <Menu.Item>
                 e2clothes
             </Menu.Item>
