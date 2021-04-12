@@ -1,16 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import Landing from './pages/Landing';
+import Routes from './routes'
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route path="/">
-          <Landing />
-        </Route>
-      </Switch>
-    </Router>
+    <Routes />
   );
 }
 
