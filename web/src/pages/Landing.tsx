@@ -1,6 +1,5 @@
-import { url } from 'node:inspector'
 import React from 'react'
-import { Container, Header, Icon, Segment, Image } from 'semantic-ui-react'
+import { Container, Header, Segment } from 'semantic-ui-react'
 import NavBar from '../components/NavBar'
 import RecommandArea from '../components/RecommandArea'
 
