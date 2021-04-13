@@ -26,6 +26,7 @@
 #  fk_rails_...  (address_id => addresses.id)
 #
 class User < ApplicationRecord
+  include BCrypt
   belongs_to :address, optional: true
   has_many :carts
   has_many :cart_items,
@@ -53,8 +54,8 @@ class User < ApplicationRecord
                     numericality: true
 
   validates :password, length: {
-    in: 6..20,
-    wrong_length: 'must be a length between 6 and 20'
+    minimum: 6,
+    wrong_length: 'must be a length minimnu is 6 '
   }
   validates :email, uniqueness: true, format: {
     with: URI::MailTo::EMAIL_REGEXP,
@@ -66,10 +67,19 @@ class User < ApplicationRecord
   }
 
   before_save :ensure_email_downcase
+  before_save :ensure_password_hash
+
+  def password_hash
+    Password.new(password)
+  end
 
   private
 
   def ensure_email_downcase
     self.email = email.downcase
+  end
+
+  def ensure_password_hash
+    self.password = Password.create(password)
   end
 end
