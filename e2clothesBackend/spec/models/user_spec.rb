@@ -174,6 +174,15 @@ RSpec.describe User, type: :model do
       expect(user.email).to eq 'test@gmail.com'
       expect(user2.email).to eq 'justfortesting@gmail.com'
     end
+
+    it 'hash the password correctly' do
+      user = create(:user)
+
+      user.password = 'testmypassowrd'
+      user.save
+
+      expect(user.password_hash).to eq 'testmypassowrd'
+    end
   end
 
   describe '#associations' do
