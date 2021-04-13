@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show update destroy]
+  # skip action check Authorization head when user signUp
+  skip_before_action :authorize_request, only: :signup
 
   # GET /users
   def index
