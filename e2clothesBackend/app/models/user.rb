@@ -70,7 +70,7 @@ class User < ApplicationRecord
   before_save :ensure_password_hash
 
   def password_hash
-    Password.new(password)
+    @password_hash ||= Password.new(password)
   end
 
   private
@@ -80,6 +80,7 @@ class User < ApplicationRecord
   end
 
   def ensure_password_hash
-    self.password = Password.create(password)
+    @password_hash = Password.create(password)
+    self.password = @password_hash
   end
 end
