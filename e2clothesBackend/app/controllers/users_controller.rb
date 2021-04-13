@@ -31,6 +31,13 @@ class UsersController < ApplicationController
     head :no_content
   end
 
+  def signup
+    user = User.create!(user_params)
+    auth_token = AuthenticateUser.new(user.email, user_params[:password]).call
+    res = { message: Message.account_created, auth_token: auth_token }
+    json_response(res, :created)
+  end
+
   private
 
   # white list

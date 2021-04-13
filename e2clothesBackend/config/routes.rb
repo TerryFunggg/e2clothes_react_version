@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   post '/graphql', to: 'graphql#execute'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   post '/login', to: 'authentication#authenticate'
+  post '/signup', to: 'users#signup'
   resource :api do
     resources :users, :addresses, :carts, :rates, :traffics
     resources :orders, :order_products
