@@ -7,6 +7,9 @@ import { Form, Input, Button } from 'formik-semantic-ui'
 import { Container, Dimmer, Loader, Segment, Form as SForm, Checkbox, Header } from 'semantic-ui-react'
 import { FormikHelpers } from 'formik'
 
+import SignUpValues from '../shared/signUpValues.interface'
+import SignUpForm from '../components/SignUpForm'
+
 const SIGNUP_MUTATION = gql`
   mutation signUp($user: SignUpInput!){
     signUp(user: $user){
@@ -15,15 +18,6 @@ const SIGNUP_MUTATION = gql`
   }
 `
 
-interface SignUpValues {
-    email: string,
-    user_name: string,
-    first_name: string,
-    last_name: string,
-    password: string,
-    phone: string,
-    comfirmPassword: string
-}
 
 export default function SignUp() {
     const [dimmerActive, setDimmerActive] = useState(false);
@@ -78,29 +72,11 @@ export default function SignUp() {
                     <Dimmer active={dimmerActive} inverted>
                         <Loader>Loading</Loader>
                     </Dimmer>
-                    <Form size='large'
+                    <SignUpForm
                         initialValues={initValue}
-                        validationSchema={validationSchema}
+                        validationSchema={validateSchema}
                         onSubmit={onSubmit}
-                    >
-                        <Input label="Email" name="email" />
-                        <Form.Group widths="equal">
-                            <Input label="First Name" name="first_name" />
-                            <Input label="Last Name" name="last_name" />
-                        </Form.Group>
-                        <Input label="User Name" name="user_name" />
-                        <Input label="Phone" name="phone" />
-                        <Input label="Password" name="password" />
-                        <Input label="Confirm Password" name="confirmPassword" />
-                        <SForm.Field
-                            control={Checkbox}
-                            label={{ children: 'I agree to the Terms and Conditions' }}
-                        />
-                        <Form.Group style={{ display: 'flex', justifyContent: 'right' }}>
-                            <Button.Submit style={{ marginRight: '2rem' }}>SignUp</Button.Submit>
-                            <Button.Reset>Cancel</Button.Reset>
-                        </Form.Group>
-                    </Form>
+                    />
                 </Dimmer.Dimmable>
             </Container>
         </>
