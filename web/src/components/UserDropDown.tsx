@@ -3,7 +3,8 @@ import { Menu, Dropdown, Button, Image } from 'semantic-ui-react'
 
 
 interface UserDropDownProps {
-    user: User
+    user: User,
+    style: React.CSSProperties
 }
 
 interface User {
@@ -14,7 +15,7 @@ interface User {
 }
 
 
-export default function UserDropDown({ user }: UserDropDownProps) {
+export default function UserDropDown({ user, style }: UserDropDownProps) {
 
     const options = [
         {
@@ -33,7 +34,7 @@ export default function UserDropDown({ user }: UserDropDownProps) {
     ]
 
     return (
-        <Dropdown style={{ margin: '1rem' }} options={options} trigger={(
+        <Dropdown style={style} options={options} trigger={(
             <span>
                 <Image src={user.avatar} avatar /> {user.user_name}
             </span>

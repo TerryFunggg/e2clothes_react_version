@@ -50,7 +50,7 @@ export default function NavBar() {
 
             <Menu.Menu position="right">
                 {data.me.user_name ? (
-                    <UserDropDown user={data.me} />
+                    <UserDropDown style={{ margin: '1rem' }} user={data.me} />
                 ) : (
                     <Menu.Item>
                         <Link to="logIn" >
