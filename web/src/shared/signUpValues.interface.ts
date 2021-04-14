@@ -5,5 +5,5 @@ export default interface SignUpValues {
   last_name: string,
   password: string,
   phone: string,
-  comfirmPassword: string
+  confirmPassword: string
 }
