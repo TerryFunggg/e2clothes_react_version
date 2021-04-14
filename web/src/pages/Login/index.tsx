@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { useMutation } from '@apollo/client'
+import { useMutation, useApolloClient } from '@apollo/client'
 import { useHistory } from 'react-router-dom'
-import { Container, Dimmer, Loader, Segment, Header } from 'semantic-ui-react'
+import { Container, Dimmer, Loader, Segment, Header, Message } from 'semantic-ui-react'
 import { FormikHelpers } from 'formik'
 
 import validationSchema from './loginValidationSchema'
@@ -14,6 +14,7 @@ const LOGIN_MUTATION = loader('./login_mutation.graphql');
 
 export default function LogIn() {
     const [logIn, { loading, error }] = useMutation(LOGIN_MUTATION)
+    const client = useApolloClient()
     const history = useHistory();
 
 
@@ -33,6 +34,7 @@ export default function LogIn() {
         history.push('/')
     }
 
+
     return (
         <>
             <Container style={{ margin: 'auto', height: '90vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '400px' }}>
@@ -41,6 +43,12 @@ export default function LogIn() {
                     <Dimmer active={loading} inverted>
                         <Loader>Loading</Loader>
                     </Dimmer>
+                    {error ? (
+                        <Message negative>
+                            <Message.Header>Error</Message.Header>
+                            <p>Please check you email and password</p>
+                        </Message>) : ''
+                    }
                     <LogInForm
                         initialValues={initialValues}
                         validationSchema={validationSchema}
