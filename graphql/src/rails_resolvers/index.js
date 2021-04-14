@@ -35,6 +35,20 @@ module.exports = {
             });
             const token = await data.json();
             return token["auth_token"]
+        },
+        logIn: async (_, args) => {
+            const user = args.user;
+            const data = await fetch(`${baseURL}/login`, {
+                method: "POST",
+                mode: 'cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(user)
+            });
+            const { token } = await data.json();
+            return token;
+
         }
     }
 }
