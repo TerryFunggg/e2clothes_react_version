@@ -1,0 +1,3 @@
+mutation logIn($user: LogInInput!){
+   logIn(user: $user)
+}

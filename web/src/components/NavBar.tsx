@@ -32,7 +32,11 @@ export default function NavBar() {
 
             <Menu.Menu position="right">
                 <Menu.Item>
-                    <Button style={{ marginRight: '1rem' }}>Login</Button>
+                    <Link to="logIn" >
+                        <Button style={{ marginRight: '1rem' }}>
+                            Login
+                        </Button>
+                    </Link>
                     <Link to="signUp" >
                         <Button color="blue">
                             SignUp
