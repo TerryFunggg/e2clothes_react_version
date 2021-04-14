@@ -6,11 +6,11 @@
 #  avatar     :string(255)
 #  email      :string(255)      not null
 #  first_name :string(255)      not null
-#  is_active  :boolean          not null
+#  is_active  :boolean          default(TRUE), not null
 #  last_name  :string(255)
 #  password   :string(255)      not null
 #  phone      :string(255)      not null
-#  role       :string(255)      not null
+#  role       :string(255)      default("buyer"), not null
 #  user_name  :string(255)      not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -48,7 +48,7 @@ class User < ApplicationRecord
     admin: ADMIN
   }
 
-  validates :first_name, :last_name, :phone, :password, :role, presence: true
+  validates :first_name, :last_name, :phone, :password, presence: true
   validates :phone, uniqueness: true,
                     length: { is: 8 },
                     numericality: true
