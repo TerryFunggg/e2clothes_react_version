@@ -1,6 +1,6 @@
 import React from 'react'
 import { Form, Input, Button } from 'formik-semantic-ui'
-import { Form as SForm, Checkbox, Header } from 'semantic-ui-react'
+import { Form as SForm, Checkbox } from 'semantic-ui-react'
 import { FormikHelpers } from 'formik';
 
 import SignUpValues from '../shared/signUpValues.interface'
@@ -27,8 +27,8 @@ export default function SignUpForm({ initialValues, validationSchema, onSubmit }
             </Form.Group>
             <Input label="User Name" name="user_name" />
             <Input label="Phone" name="phone" />
-            <Input label="Password" name="password" />
-            <Input label="Confirm Password" name="confirmPassword" />
+            <Input label="Password" name="password" inputProps={{ type: "password" }} />
+            <Input label="Confirm Password" name="confirmPassword" inputProps={{ type: "password" }} />
             <SForm.Field
                 control={Checkbox}
                 label={{ children: 'I agree to the Terms and Conditions' }}
