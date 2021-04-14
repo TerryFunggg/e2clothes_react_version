@@ -17,6 +17,7 @@
     "formik": "^2.2.6",
     "formik-semantic-ui": "^0.10.0",
     "graphql": "^15.5.0",
+    "graphql.macro": "^1.4.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.3",
@@ -51,5 +52,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {}
 }
