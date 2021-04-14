@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   post '/login', to: 'authentication#authenticate'
   post '/signup', to: 'users#signup'
+  post '/me', to: 'users#me'
   resource :api do
     resources :users, :addresses, :carts, :rates, :traffics
     resources :orders, :order_products

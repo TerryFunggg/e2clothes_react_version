@@ -40,6 +40,10 @@ class UsersController < ApplicationController
     json_response(res, :created)
   end
 
+  def me
+    json_response(@current_user)
+  end
+
   private
 
   # white list
