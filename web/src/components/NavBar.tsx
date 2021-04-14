@@ -5,6 +5,8 @@ import { useAppDispatch, useAppSelector } from '../hooks'
 import { activeHome, activeMarket, selectNavItemActive } from '../reducers/navItemActive'
 import { gql, useQuery } from '@apollo/client'
 
+import UserDropDown from './UserDropDown'
+
 const ME_QUERY = gql`
 {
     me {
@@ -23,22 +25,6 @@ export default function NavBar() {
 
     if (loading) return (<p>Loading....</p>)
     if (error) console.log(error)
-
-    const options = [
-        {
-            key: 'user',
-            'text': (
-                <span>
-                    Hi,<strong>{data.me.user_name}</strong>
-                </span>
-            )
-        },
-        { key: 'profile', text: 'Your Profile' },
-        { key: 'order', text: 'Your Order' },
-        { key: 'stars', text: 'Your Stars' },
-        { key: 'help', text: 'Help' },
-        { key: 'sign-out', text: 'Sign Out' },
-    ]
 
     return (
         <Menu size='large' stackable style={{ marginBottom: '0' }} >
@@ -64,11 +50,7 @@ export default function NavBar() {
 
             <Menu.Menu position="right">
                 {data.me.user_name ? (
-                    <Dropdown style={{ margin: '1rem' }} options={options} trigger={(
-                        <span>
-                            <Image src={data.me.avatar} avatar /> {data.me.user_name}
-                        </span>
-                    )} />
+                    <UserDropDown user={data.me} />
                 ) : (
                     <Menu.Item>
                         <Link to="logIn" >
