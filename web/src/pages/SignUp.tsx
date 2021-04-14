@@ -12,16 +12,13 @@ import SignUpForm from '../components/SignUpForm'
 
 const SIGNUP_MUTATION = gql`
   mutation signUp($user: SignUpInput!){
-    signUp(user: $user){
-      token
-    }
+    signUp(user: $user)
   }
 `
 
 
 export default function SignUp() {
-    const [dimmerActive, setDimmerActive] = useState(false);
-    const [signUp, { data }] = useMutation(SIGNUP_MUTATION)
+    const [signUp, { loading, error }] = useMutation(SIGNUP_MUTATION)
     const history = useHistory();
 
     const initValue: SignUpValues = {
@@ -45,10 +42,6 @@ export default function SignUp() {
 
     const onSubmit = async (values: SignUpValues, { setSubmitting }: FormikHelpers<SignUpValues>) => {
         setSubmitting(true)
-        setDimmerActive(true)
-        setTimeout(() => {
-            setDimmerActive(false)
-        }, 9000)
         const response = await signUp({
             variables: {
                 user: {
@@ -61,20 +54,21 @@ export default function SignUp() {
                 }
             }
         })
-        setDimmerActive(false)
+        localStorage.setItem('token', response.data.signUp)
+        history.push('/')
     }
 
     return (
         <>
             <Container style={{ margin: 'auto', height: '90vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                 <Header as='h2' icon='pin' content='SignUp' />
-                <Dimmer.Dimmable as={Segment} dimmed={dimmerActive}>
-                    <Dimmer active={dimmerActive} inverted>
+                <Dimmer.Dimmable as={Segment} dimmed={loading}>
+                    <Dimmer active={loading} inverted>
                         <Loader>Loading</Loader>
                     </Dimmer>
                     <SignUpForm
                         initialValues={initValue}
-                        validationSchema={validateSchema}
+                        validationSchema={validationSchema}
                         onSubmit={onSubmit}
                     />
                 </Dimmer.Dimmable>
