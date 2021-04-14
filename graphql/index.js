@@ -6,7 +6,11 @@ const typeDefs = require('./src/schema');
 
 const server = new ApolloServer({
     typeDefs,
-    resolvers
+    resolvers,
+    context: async ({ req }) => {
+        const token = req.headers.authorization || ''
+        return { token }
+    }
 });
 
 server.listen().then(({ url }) => {
