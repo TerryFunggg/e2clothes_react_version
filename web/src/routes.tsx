@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Landing from './pages/Landing';
-import SignUp from './pages/SignUp';
+import SignUp from './pages/SignUp/';
 
 function Routes() {
   return (

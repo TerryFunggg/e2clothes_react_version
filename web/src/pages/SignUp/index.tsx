@@ -1,44 +1,31 @@
 import React, { useState } from 'react'
-import { gql, useMutation } from '@apollo/client'
-import * as Yup from 'yup'
-import { validateSchema } from 'graphql'
-import { Link, useHistory } from 'react-router-dom'
-import { Form, Input, Button } from 'formik-semantic-ui'
-import { Container, Dimmer, Loader, Segment, Form as SForm, Checkbox, Header } from 'semantic-ui-react'
+import { useMutation } from '@apollo/client'
+import { useHistory } from 'react-router-dom'
+import { Container, Dimmer, Loader, Segment, Header } from 'semantic-ui-react'
 import { FormikHelpers } from 'formik'
 
-import SignUpValues from '../shared/signUpValues.interface'
-import SignUpForm from '../components/SignUpForm'
+import validationSchema from './signUpValidationSchema'
+import SignUpValues from '../../shared/signUpValues.interface'
+import SignUpForm from './components/SignUpForm'
 
-const SIGNUP_MUTATION = gql`
-  mutation signUp($user: SignUpInput!){
-    signUp(user: $user)
-  }
-`
+import { loader } from 'graphql.macro';
+const SIGNUP_MUTATION = loader('./signup_mutation.graphql');
 
 
 export default function SignUp() {
     const [signUp, { loading, error }] = useMutation(SIGNUP_MUTATION)
     const history = useHistory();
 
-    const initValue: SignUpValues = {
-        email: '',
-        phone: '',
+
+    const initialValues: SignUpValues = {
         user_name: '',
-        password: '',
         first_name: '',
         last_name: '',
-        comfirmPassword: ''
+        email: '',
+        phone: '',
+        password: '',
+        confirmPassword: ""
     }
-
-    const validationSchema = Yup.object({
-        email: Yup.string().email('Invalid email address').required("Email Required"),
-        user_name: Yup.string().max(15, "Must be 15 characters or less").required('User name Required'),
-        first_name: Yup.string().max(20, 'Must be 20 characters or less').required("First name Required"),
-        last_name: Yup.string().max(20, 'Must be 20 characters or less').required("Last name Required"),
-        password: Yup.string().max(30, "Must be 30 characters or less").required('Password Required'),
-        confirmPassword: Yup.string().oneOf([Yup.ref("password")], "Passwords must match"),
-    })
 
     const onSubmit = async (values: SignUpValues, { setSubmitting }: FormikHelpers<SignUpValues>) => {
         setSubmitting(true)
@@ -67,7 +54,7 @@ export default function SignUp() {
                         <Loader>Loading</Loader>
                     </Dimmer>
                     <SignUpForm
-                        initialValues={initValue}
+                        initialValues={initialValues}
                         validationSchema={validationSchema}
                         onSubmit={onSubmit}
                     />
