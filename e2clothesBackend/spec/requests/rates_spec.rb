@@ -1,11 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe 'Rates', type: :request do
+  let!(:user) { create :user }
   let!(:rates) { create_list(:rate, 5) }
   let(:rate_id) { rates.first.id }
+  let(:headers) { valid_headers }
   describe 'GET /rates' do
     # make http GET request before example
-    before { get '/api/rates' }
+    before { get '/api/rates', headers: headers }
     it 'return rates' do
       expect(json).not_to be_empty
       expect(json.size).to eq(5)
@@ -17,7 +19,7 @@ RSpec.describe 'Rates', type: :request do
   end
 
   describe 'GET /rates/:id' do
-    before { get "/api/rates/#{rate_id}" }
+    before { get "/api/rates/#{rate_id}", headers: headers }
 
     context 'when the record exists' do
       it 'returns the rate' do
@@ -47,10 +49,10 @@ RSpec.describe 'Rates', type: :request do
     # valid payload
     let(:product) { create(:product) }
     let(:user) { create(:user) }
-    let(:valid_attr) { JSON.parse(build(:rate, user_id: user.id, product_id: product.id).to_json) }
+    let(:valid_attr) { { user_id: user.id, product_id: product.id } }
 
     context 'when the record valid' do
-      before { post '/api/rates', params: valid_attr }
+      before { post '/api/rates', params: :valid_attr.to_json, headers: headers }
 
       it 'create a rates' do
         expect(json['user_id']).to eq(user.id)
@@ -63,7 +65,7 @@ RSpec.describe 'Rates', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/api/rates', params: { name: 'test' } }
+      before { post '/api/rates', params: { name: 'test' }, headers: headers }
 
       it 'retruns status code 422' do
         expect(response).to have_http_status(422)
@@ -79,7 +81,7 @@ RSpec.describe 'Rates', type: :request do
     let(:valid_attr) { { name: 'test' } }
 
     context 'when the record exists' do
-      before { put "/api/rates/#{rate_id}", params: valid_attr }
+      before { put "/api/rates/#{rate_id}", params: valid_attr, headers: headers }
 
       it 'updates a record' do
         expect(response.body).to be_empty
@@ -94,7 +96,7 @@ RSpec.describe 'Rates', type: :request do
   describe 'DELETE rates/:id' do
     before do
       rates = create(:rate)
-      delete "/api/rates/#{rates.id}"
+      delete "/api/rates/#{rates.id}", headers: headers
     end
 
     it 'returns status code 204' do

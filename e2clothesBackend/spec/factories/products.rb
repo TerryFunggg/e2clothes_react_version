@@ -14,8 +14,7 @@
 #
 # Indexes
 #
-#  fk_rails_b169a26347     (shop_id)
-#  index_products_on_name  (name) UNIQUE
+#  fk_rails_b169a26347  (shop_id)
 #
 # Foreign Keys
 #
