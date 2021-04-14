@@ -19,6 +19,21 @@ module.exports = {
         },
         user: async (parent, args) => {
             return await fetchFromRails(`users/${args.id}`);
+        },
+        me: async (parent, args, { token }) => {
+            console.log(token);
+            const response = await fetch(`${baseURL}/me`, {
+                method: "POST",
+                mode: 'cors',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    "Content-type": "application/json",
+                    "Accept": "application/json",
+                    "Accept-Charset": "utf-8"
+                },
+            });
+            const user = await response.json()
+            return user
         }
     },
 
