@@ -4,18 +4,17 @@ import React from 'react';
 
 const httpLink = new HttpLink({ uri: 'http://localhost:4000' })
 const context = setContext(async (req, { headers }) => {
-    // TODO: get Token
-
     return {
         ...headers,
         headers: {
-
+            Authorization: localStorage.getItem('token') || null
         }
     }
 })
 
+const link = context.concat(httpLink as any)
 const client = new ApolloClient({
-    link: (httpLink as any),
+    link: (link as any),
     cache: new InMemoryCache()
 })
 
