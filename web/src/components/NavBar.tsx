@@ -23,7 +23,6 @@ export default function NavBar() {
     const dispatch = useAppDispatch();
     const { loading, error, data } = useQuery(ME_QUERY)
 
-    if (loading) return (<p>Loading....</p>)
     if (error) console.log(error)
 
     return (
@@ -49,7 +48,7 @@ export default function NavBar() {
             </Menu.Item>
 
             <Menu.Menu position="right">
-                {data.me.user_name ? (
+                {data?.me.user_name ? (
                     <UserDropDown style={{ margin: '1rem' }} user={data.me} />
                 ) : (
                     <Menu.Item>
