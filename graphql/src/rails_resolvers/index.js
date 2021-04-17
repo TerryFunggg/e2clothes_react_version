@@ -1,69 +1,47 @@
 require('dotenv').config();
 const fetch = require('node-fetch');
+const { get, post } = require('../services/rails_api')
+const { ApolloError } = require('apollo-server-errors');
 
-const baseURL = process.env.RAILS_URL
-const baseApiURL = baseURL + '/api';
-
-const fetchFromRails = (url) => {
-    return new Promise((resolve, reject) => {
-        fetch(`${baseApiURL}/${url}`)
-            .then(res => resolve(res.json()))
-            .catch(e => reject(e));
-    })
-}
 
 module.exports = {
     Query: {
-        users: async () => {
-            return await fetchFromRails('users');
+        users: async (parent, args, { token }) => {
+            return await get('users', token)
+                .catch(e => { throw new ApolloError(e) });
         },
-        user: async (parent, args) => {
-            return await fetchFromRails(`users/${args.id}`);
+        user: async (parent, args, { token }) => {
+            return await get(`users/${args.id}`, token)
+                .catch(e => { throw new ApolloError(e) });
         },
         me: async (parent, args, { token }) => {
             console.log(token);
-            const response = await fetch(`${baseURL}/me`, {
-                method: "POST",
-                mode: 'cors',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    "Content-type": "application/json",
-                    "Accept": "application/json",
-                    "Accept-Charset": "utf-8"
-                },
-            });
-            const user = await response.json()
-            return user
+            const user = await post(`me`, {}, token, false);
+            if (!user.message) {
+                console.log(user);
+                return user
+            }
+            return {}
         }
     },
 
     Mutation: {
         signUp: async (_, args) => {
             const user = args.user;
-            const data = await fetch(`${baseURL}/signup`, {
-                method: "POST",
-                mode: 'cors',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(user)
-            });
-            const token = await data.json();
-            return token["auth_token"]
+            const data = await post(`signup`, user, '', false);
+            console.log(data);
+            if (data.auth_token) {
+                return data.auth_token
+            }
+            throw new ApolloError(data.message)
         },
         logIn: async (_, args) => {
             const user = args.user;
-            const data = await fetch(`${baseURL}/login`, {
-                method: "POST",
-                mode: 'cors',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(user)
-            });
-            const { token } = await data.json();
-            return token;
-
+            const data = await post(`login`, user, '', false);
+            if (data.token) {
+                return data.token;
+            }
+            throw new ApolloError(data.message, 401)
         }
     }
 }
