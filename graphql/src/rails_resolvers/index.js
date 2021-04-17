@@ -15,10 +15,8 @@ module.exports = {
                 .catch(e => { throw new ApolloError(e) });
         },
         me: async (parent, args, { token }) => {
-            console.log(token);
             const user = await post(`me`, {}, token, false);
             if (!user.message) {
-                console.log(user);
                 return user
             }
             return {}
@@ -29,7 +27,6 @@ module.exports = {
         signUp: async (_, args) => {
             const user = args.user;
             const data = await post(`signup`, user, '', false);
-            console.log(data);
             if (data.auth_token) {
                 return data.auth_token
             }
