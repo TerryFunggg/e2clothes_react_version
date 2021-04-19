@@ -29,11 +29,11 @@ function App() {
   const resourceComponents = []
   Object.keys(resources).map(resource => {
     // Get resource object which export from 'component/index.js', eg. users, addresses....
-    const methods = resources[resource];
+    const res = resources[resource];
     // Upper first letter, eg. users => Users
     const prefix = resource.charAt(0).toUpperCase() + resource.slice(1)
     // Get each resource jsx component, like UsersList, UserEdit....
-    const [list, edit, create] = [methods[`${prefix}List`], methods[`${prefix}Edit`], methods[`${prefix}Create`]]
+    const [list, edit, create] = [res[`${prefix}List`], res[`${prefix}Edit`], res[`${prefix}Create`]]
     resourceComponents.push(<Resource key={resource} name={resource} list={list} edit={edit} create={create} />)
   })
 
