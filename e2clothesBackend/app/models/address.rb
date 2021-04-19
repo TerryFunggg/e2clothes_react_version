@@ -12,4 +12,14 @@
 #
 class Address < ApplicationRecord
   validates :city, :building_address, :street_address, :zip_code, presence: true
+
+  def self.search(search)
+    where(
+      "city LIKE :q
+        OR building_address LIKE :q
+        OR street_address LIKE :q
+        OR zip_code LIKE :q",
+      q: "%#{search}%"
+    )
+  end
 end
