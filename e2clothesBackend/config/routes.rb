@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   post '/login', to: 'authentication#authenticate'
   post '/signup', to: 'users#signup'
   post '/me', to: 'users#me'
+  get '/dashboard/home', to: 'dashboard#index'
   resource :api do
     resources :users, :addresses, :carts, :rates, :traffics
     resources :orders, :order_products
