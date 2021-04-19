@@ -40,7 +40,7 @@ function App() {
 
   return (
     <Admin dashboard={Dashboard} dataProvider={dataProvider} authProvider={authProvider}>
-      {resourceComponents.map(r => (r))}
+      {(resourceComponents)}
     </Admin>
   );
 }
