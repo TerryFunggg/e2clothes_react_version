@@ -3,7 +3,9 @@ class ProductsController < ApplicationController
 
   # GET /
   def index
-    @products = Product.all
+    @products = Product.search(params[:q])
+    @products = @products.pages(page: params[:_start]) if params[:_start].present?
+    total_count_header @products.count
     json_response(@products)
   end
 

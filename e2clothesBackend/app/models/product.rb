@@ -25,4 +25,10 @@ class Product < ApplicationRecord
 
   validates :name, :price, presence: true
   validates :price, numericality: true
+
+  def self.search(search)
+    where(
+      'name LIKE :q', q: "%#{search}%"
+    )
+  end
 end
