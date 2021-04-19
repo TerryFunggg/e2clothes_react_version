@@ -73,6 +73,18 @@ class User < ApplicationRecord
     @password_hash ||= Password.new(password)
   end
 
+  def self.search(search)
+    where(
+      "id LIKE :q
+        OR user_name LIKE :q
+        OR first_name LIKE :q
+        OR last_name LIKE :q
+        OR email LIKE :q
+        OR phone LIKE :q",
+      q: "%#{search}%"
+    )
+  end
+
   private
 
   def ensure_email_downcase
