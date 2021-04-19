@@ -1,9 +1,4 @@
-import { UserList } from './user'
-import { AddressList, AddressEdit, AddressCreate } from './address'
+import * as users from './user'
+import * as addresses from './address'
 
-export {
-  UserList,
-  AddressEdit,
-  AddressList,
-  AddressCreate
-}
+export { users, addresses }

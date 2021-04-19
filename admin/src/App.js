@@ -8,12 +8,7 @@ import Dashboard from './Dashboard'
 import AddressIcon from '@material-ui/icons/House'
 import UserIcon from '@material-ui/icons/Group'
 
-import {
-  AddressCreate,
-  AddressEdit,
-  AddressList,
-  UserList,
-} from './components/index.js'
+import * as resources from './components/index.js'
 
 const httpClient = (url, options = {}) => {
   if (!options.headers) {
@@ -30,10 +25,22 @@ const httpClient = (url, options = {}) => {
 
 const dataProvider = jsonServerProvider('http://localhost:3000/api', httpClient)
 function App() {
+  // auto resources register
+  const resourceComponents = []
+  Object.keys(resources).map(resource => {
+    // Get resource object which export from 'component/index.js', eg. users, addresses....
+    const methods = resources[resource];
+    // Upper first letter, eg. users => Users
+    const prefix = resource.charAt(0).toUpperCase() + resource.slice(1)
+    // Get each resource jsx component, like UsersList, UserEdit....
+    const [list, edit, create] = [methods[`${prefix}List`], methods[`${prefix}Edit`], methods[`${prefix}Create`]]
+    resourceComponents.push(<Resource key={resource} name={resource} list={list} edit={edit} create={create} />)
+  })
+
+
   return (
     <Admin dashboard={Dashboard} dataProvider={dataProvider} authProvider={authProvider}>
-      <Resource name="users" list={UserList} icon={UserIcon} />
-      <Resource name="addresses" list={AddressList} edit={AddressEdit} create={AddressCreate} icon={AddressIcon} />
+      {resourceComponents.map(r => (r))}
     </Admin>
   );
 }
