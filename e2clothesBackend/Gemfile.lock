@@ -100,16 +100,22 @@ GEM
     marcel (1.0.0)
     method_source (1.0.0)
     mini_mime (1.0.3)
+    mini_portile2 (2.5.0)
     minitest (5.14.4)
     msgpack (1.4.2)
     mysql2 (0.5.3)
     nio4r (2.5.7)
+    nokogiri (1.11.2)
+      mini_portile2 (~> 2.5.0)
+      racc (~> 1.4)
     nokogiri (1.11.2-x86_64-linux)
       racc (~> 1.4)
     puma (5.2.2)
       nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (6.1.3.1)
@@ -173,6 +179,7 @@ GEM
     websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    will_paginate (3.1.8)
     zeitwerk (2.4.2)
 
 PLATFORMS
@@ -192,10 +199,12 @@ DEPENDENCIES
   listen (~> 3.3)
   mysql2 (~> 0.5)
   puma (~> 5.0)
+  rack-cors
   rails (~> 6.1.3, >= 6.1.3.1)
   rspec-rails
   spring
   tzinfo-data
+  will_paginate (~> 3.1.0)
 
 RUBY VERSION
    ruby 2.7.2p137
