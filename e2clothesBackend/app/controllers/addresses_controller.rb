@@ -3,8 +3,8 @@ class AddressesController < ApplicationController
 
   # GET /
   def index
-    @addresses = Address.search(params[:q])
-    @addresses.pages(page: params[:_start]) if params[:_start].present?
+    addresses = Address.search(params[:q])
+    @addresses = addresses.pages(page: params[:_start]) if params[:_start].present?
     response.headers['Access-Control-Expose-Headers'] = 'X-Total-Count'
     response.headers['X-Total-Count'] = @addresses.count
     json_response(@addresses)
