@@ -19,7 +19,7 @@ const AddressFilter = (props) => (
   </Filter>
 );
 
-export const AddressList = props => (
+export const AddressesList = props => (
   <List filters={<AddressFilter />} {...props}>
     <Datagrid >
       <EditButton />
@@ -33,7 +33,7 @@ export const AddressList = props => (
 );
 
 
-export const AddressEdit = props => (
+export const AddressesEdit = props => (
   <Edit {...props}>
     <SimpleForm>
       <TextInput source="id" />
@@ -45,7 +45,7 @@ export const AddressEdit = props => (
   </Edit>
 )
 
-export const AddressCreate = props => (
+export const AddressesCreate = props => (
   <Create {...props}>
     <SimpleForm>
       <TextInput source="id" />
