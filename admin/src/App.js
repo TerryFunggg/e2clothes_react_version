@@ -4,9 +4,7 @@ import jsonServerProvider from 'ra-data-json-server'
 import authProvider from './authProvider'
 
 import Dashboard from './Dashboard'
-
-import AddressIcon from '@material-ui/icons/House'
-import UserIcon from '@material-ui/icons/Group'
+import icons from './icons'
 
 import * as resources from './components/index.js'
 
@@ -34,7 +32,7 @@ function App() {
     const prefix = resource.charAt(0).toUpperCase() + resource.slice(1)
     // Get each resource jsx component, like UsersList, UserEdit....
     const [list, edit, create] = [res[`${prefix}List`], res[`${prefix}Edit`], res[`${prefix}Create`]]
-    resourceComponents.push(<Resource key={resource} name={resource} list={list} edit={edit} create={create} />)
+    resourceComponents.push(<Resource key={resource} name={resource} list={list} edit={edit} create={create} icon={icons[resource]} />)
   })
 
 
