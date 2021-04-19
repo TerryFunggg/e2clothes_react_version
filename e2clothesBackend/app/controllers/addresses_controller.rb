@@ -3,7 +3,10 @@ class AddressesController < ApplicationController
 
   # GET /
   def index
-    @addresses = Address.all
+    @addresses = Address.search(params[:q])
+    @addresses.pages(page: params[:_start]) if params[:_start].present?
+    response.headers['Access-Control-Expose-Headers'] = 'X-Total-Count'
+    response.headers['X-Total-Count'] = @addresses.count
     json_response(@addresses)
   end
 
@@ -35,6 +38,11 @@ class AddressesController < ApplicationController
   # white list
   def address_params
     params.permit(:city, :building_address, :street_address, :zip_code)
+  end
+
+  # for search
+  def filtering_params
+    params.slice(:_start, :q)
   end
 
   def set_user
