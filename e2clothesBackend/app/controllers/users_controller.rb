@@ -5,10 +5,9 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    users = User.search(params[:q])
-    @users = users.pages(page: params[:_start]) if params[:_start].present?
-    response.headers['Access-Control-Expose-Headers'] = 'X-Total-Count'
-    response.headers['X-Total-Count'] = @users.count
+    @users = User.search(params[:q])
+    @users = @users.pages(page: params[:_start]) if params[:_start].present?
+    total_count_header @users.count
     json_response(@users)
   end
 

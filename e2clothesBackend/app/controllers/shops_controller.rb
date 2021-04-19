@@ -4,6 +4,8 @@ class ShopsController < ApplicationController
   # GET /
   def index
     @shops = Shop.all
+    @shops = @shops.pages(page: params[:_start]) if params[:_start].present?
+    total_count_header @shops.count
     json_response(@shops)
   end
 
