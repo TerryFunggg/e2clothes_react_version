@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.3.14",
+    "@craco/craco": "^6.1.1",
+    "@headlessui/react": "^1.0.0",
     "@reduxjs/toolkit": "^1.5.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -15,7 +17,6 @@
     "@types/react-router-dom": "^5.1.7",
     "apollo-link-context": "^1.0.20",
     "formik": "^2.2.6",
-    "formik-semantic-ui": "^0.10.0",
     "graphql": "^15.5.0",
     "graphql.macro": "^1.4.2",
     "react": "^17.0.2",
@@ -23,16 +24,14 @@
     "react-redux": "^7.2.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
-    "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^2.0.3",
     "typescript": "^4.1.2",
     "web-vitals": "^1.0.1",
     "yup": "^0.32.9"
   },
   "scripts": {
-    "start": "PORT=5000 react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "PORT=5000 craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -53,5 +52,10 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@tailwindcss/postcss7-compat": "^2.1.0",
+    "autoprefixer": "^9",
+    "postcss": "^7",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat"
+  }
 }
