@@ -4,11 +4,12 @@ export interface LogInValues {
 }
 
 export interface SignUpValues extends LogInValues {
-  email: string,
   user_name: string,
   first_name: string,
   last_name: string,
-  password: string,
   phone: string,
-  confirmPassword: string
+  confirmPassword?: string
 }
+
+
+export interface ProfileValues extends LogInValues, SignUpValues { }
