@@ -8,12 +8,17 @@ import validationSchema from './loginValidationSchema'
 import { LogInValues } from '../../shared/types.interface'
 import LogInForm from './components/LoginForm'
 
+import { setIsLogged, selectIsLogged } from '../../reducers/isLogged'
+import { useAppDispatch, useAppSelector } from '../../hooks'
+
 import { loader } from 'graphql.macro';
 const LOGIN_MUTATION = loader('./login_mutation.graphql');
 
 
 export default function LogIn() {
     const [logIn, { loading, error }] = useMutation(LOGIN_MUTATION)
+    const isLoggedSelector = useAppSelector(selectIsLogged);
+    const dispatch = useAppDispatch();
     const client = useApolloClient()
     const history = useHistory();
 
@@ -31,6 +36,7 @@ export default function LogIn() {
             }
         })
         localStorage.setItem('token', response.data.logIn)
+        dispatch(setIsLogged(true))
         history.push('/')
     }
 

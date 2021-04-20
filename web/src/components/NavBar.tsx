@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Menu, Dropdown, Button, Image } from 'semantic-ui-react'
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { activeHome, activeMarket, selectNavItemActive } from '../reducers/navItemActive'
+import { setIsLogged, selectIsLogged } from '../reducers/isLogged'
 import { gql, useQuery } from '@apollo/client'
 
 import UserDropDown from './UserDropDown'
@@ -20,6 +21,7 @@ const ME_QUERY = gql`
 // TODO: responsive for user dropdown menu
 export default function NavBar() {
     const active = useAppSelector(selectNavItemActive)
+    const isLoggedActive = useAppSelector(selectIsLogged)
     const dispatch = useAppDispatch();
     const { loading, error, data } = useQuery(ME_QUERY)
 
@@ -48,8 +50,8 @@ export default function NavBar() {
             </Menu.Item>
 
             <Menu.Menu position="right">
-                {data?.me.user_name ? (
-                    <UserDropDown style={{ margin: '1rem' }} user={data.me} />
+                {isLoggedActive ? (
+                    <UserDropDown style={{ margin: '1rem' }} user={data?.me} />
                 ) : (
                     <Menu.Item>
                         <Link to="logIn" >

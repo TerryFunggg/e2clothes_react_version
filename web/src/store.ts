@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import navItemActiveReducer from './reducers/navItemActive'
+import loggedReducer from './reducers/isLogged'
 
 export const store = configureStore({
   reducer: {
-    navItemActive: navItemActiveReducer
+    navItemActive: navItemActiveReducer,
+    isLogged: loggedReducer
   }
 })
 
