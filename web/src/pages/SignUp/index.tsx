@@ -5,7 +5,7 @@ import { Container, Dimmer, Loader, Segment, Header } from 'semantic-ui-react'
 import { FormikHelpers } from 'formik'
 
 import validationSchema from './signUpValidationSchema'
-import SignUpValues from '../../shared/signUpValues.interface'
+import { SignUpValues } from '../../shared/types.interface'
 import SignUpForm from './components/SignUpForm'
 
 import { loader } from 'graphql.macro';

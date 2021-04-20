@@ -5,7 +5,7 @@ import { Container, Dimmer, Loader, Segment, Header, Message } from 'semantic-ui
 import { FormikHelpers } from 'formik'
 
 import validationSchema from './loginValidationSchema'
-import LogInValues from '../../shared/loginValues.interface'
+import { LogInValues } from '../../shared/types.interface'
 import LogInForm from './components/LoginForm'
 
 import { loader } from 'graphql.macro';

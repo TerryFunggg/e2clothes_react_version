@@ -3,7 +3,7 @@ import { Form, Input, Button } from 'formik-semantic-ui'
 import { Form as SForm, Checkbox } from 'semantic-ui-react'
 import { FormikHelpers } from 'formik';
 
-import LogInValues from '../../../shared/loginValues.interface'
+import { LogInValues } from '../../../shared/types.interface'
 
 
 interface SignUpFormProps {
