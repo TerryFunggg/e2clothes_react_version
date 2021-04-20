@@ -1,5 +1,5 @@
 import React from 'react'
-import { Menu, Dropdown, Button, Image } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 
 interface UserDropDownProps {
@@ -16,28 +16,15 @@ interface User {
 
 
 export default function UserDropDown({ user, style }: UserDropDownProps) {
-
-    const options = [
-        {
-            key: 'user',
-            'text': (
-                <span>
-                    Hi,<strong>{`${user.first_name} ${user.last_name}`}</strong>
-                </span>
-            )
-        },
-        { key: 'profile', text: 'Your Profile' },
-        { key: 'order', text: 'Your Order' },
-        { key: 'stars', text: 'Your Stars' },
-        { key: 'help', text: 'Help' },
-        { key: 'sign-out', text: 'Sign Out' },
-    ]
-
     return (
-        <Dropdown style={style} options={options} trigger={(
-            <span>
-                <Image src={user.avatar} avatar /> {user.user_name}
-            </span>
-        )} />
+        <>
+            <div>
+                <img src={user.avatar} alt="" />
+                <p>{user.user_name}</p>
+                <ul>
+                    <a href="/profile">Your Profile</a>
+                </ul>
+            </div>
+        </>
     );
 }

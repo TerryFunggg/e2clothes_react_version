@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { useHistory } from 'react-router-dom'
-import { Container, Dimmer, Loader, Segment, Header } from 'semantic-ui-react'
 import { FormikHelpers } from 'formik'
 
 import validationSchema from './signUpValidationSchema'
@@ -47,19 +46,14 @@ export default function SignUp() {
 
     return (
         <>
-            <Container style={{ margin: 'auto', height: '90vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                <Header as='h2' icon='pin' content='SignUp' />
-                <Dimmer.Dimmable as={Segment} dimmed={loading}>
-                    <Dimmer active={loading} inverted>
-                        <Loader>Loading</Loader>
-                    </Dimmer>
-                    <SignUpForm
-                        initialValues={initialValues}
-                        validationSchema={validationSchema}
-                        onSubmit={onSubmit}
-                    />
-                </Dimmer.Dimmable>
-            </Container>
+
+            <h2>SignUp</h2>
+            {error ? (<p>Please check your info</p>) : ''}
+            <SignUpForm
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={onSubmit}
+            />
         </>
     );
 }

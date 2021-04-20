@@ -1,8 +1,5 @@
 import React from 'react'
-import { Form, Input, Button } from 'formik-semantic-ui'
-import { Form as SForm, Checkbox } from 'semantic-ui-react'
-import { FormikHelpers } from 'formik';
-
+import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik'
 import { LogInValues } from '../../../shared/types.interface'
 
 
@@ -14,18 +11,20 @@ interface SignUpFormProps {
 
 export default function SignUpForm({ initialValues, validationSchema, onSubmit }: SignUpFormProps) {
     return (
-
-        <Form size='large'
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            onSubmit={onSubmit}
-        >
-            <Input label="Email" name="email" />
-            <Input label="Password" name="password" inputProps={{ type: "password" }} />
-            <Form.Group style={{ display: 'flex', justifyContent: 'right' }}>
-                <Button.Submit style={{ marginRight: '2rem' }}>SignUp</Button.Submit>
-                <Button.Reset>Cancel</Button.Reset>
-            </Form.Group>
-        </Form>
+        <>
+            <Formik
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={onSubmit}
+            >
+                <Form>
+                    <Field label="Email" name="email" />
+                    <ErrorMessage name="email" component={'div'} />
+                    <Field label="Password" name="password" />
+                    <ErrorMessage name="password" component={'div'} />
+                    <button type='submit'>Login</button>
+                </Form>
+            </Formik>
+        </>
     );
 }

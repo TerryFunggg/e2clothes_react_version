@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Menu, Dropdown, Button, Image } from 'semantic-ui-react'
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { activeHome, activeMarket, selectNavItemActive } from '../reducers/navItemActive'
 import { setIsLogged, selectIsLogged } from '../reducers/isLogged'
@@ -28,45 +27,32 @@ export default function NavBar() {
     if (error) console.log(error)
 
     return (
-        <Menu size='large' stackable style={{ marginBottom: '0' }} >
-            <Menu.Item>
+        <nav>
+            <div>
                 e2clothes
-            </Menu.Item>
+            </div>
 
-            <Menu.Item
-                name='home'
-                active={active === 'home'}
-                onClick={() => dispatch(activeHome())}
-            >
-                Home
-            </Menu.Item>
+            <a style={{ color: active == 'home' ? 'red' : '' }} onClick={() => dispatch(activeHome())} href="/">Home</a>
+            <a style={{ color: active == 'market' ? 'red' : '' }} onClick={() => dispatch(activeHome())} href="/" > Market</a >
 
-            <Menu.Item
-                name='market'
-                active={active === 'market'}
-                onClick={() => dispatch(activeMarket())}
-            >
-                Market
-            </Menu.Item>
-
-            <Menu.Menu position="right">
-                {isLoggedActive ? (
+            <div>
+                {data?.me ? (
                     <UserDropDown style={{ margin: '1rem' }} user={data?.me} />
                 ) : (
-                    <Menu.Item>
-                        <Link to="logIn" >
-                            <Button style={{ marginRight: '1rem' }}>
+                    <>
+                        <a href="/logIn" >
+                            <button style={{ marginRight: '1rem' }}>
                                 Login
-                        </Button>
-                        </Link>
-                        <Link to="signUp" >
-                            <Button color="blue">
+                            </button>
+                        </a>
+                        <a href="/signUp" >
+                            <button color="blue">
                                 SignUp
-                        </Button>
-                        </Link>
-                    </Menu.Item>
+                            </button>
+                        </a>
+                    </>
                 )}
-            </Menu.Menu>
-        </Menu >
+            </div>
+        </nav >
     );
 }
