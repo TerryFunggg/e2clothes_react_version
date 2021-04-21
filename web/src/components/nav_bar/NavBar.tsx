@@ -1,12 +1,12 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../hooks";
-import { setIsLogged, selectIsLogged } from "../reducers/isLogged";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { setIsLogged, selectIsLogged } from "../../reducers/isLogged";
 import { gql, useQuery } from "@apollo/client";
 import UserDropDown from "./UserDropDown";
 import { Disclosure } from "@headlessui/react";
 import { ShoppingCartIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
-import MyDialog from "./MyDialog";
+import MyDialog from "../MyDialog";
 
 const ME_QUERY = gql`
   {

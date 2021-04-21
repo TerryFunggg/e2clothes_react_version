@@ -1,12 +1,12 @@
 import React, { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,useHistory } from "react-router-dom";
 import { Menu, Transition } from "@headlessui/react";
-import { useAppDispatch, useAppSelector } from '../hooks'
-import { showModal} from '../reducers/modalAction'
-import MyDialog from "./MyDialog";
+import { useAppDispatch, useAppSelector } from '../../hooks'
+import { showModal} from '../../reducers/modalAction'
+import MyDialog from "../MyDialog";
 
 // import types
-import {Modal as ModalType} from '../shared/types.interface';
+import {Modal as ModalType} from '../../shared/types.interface';
 
 
 interface UserDropDownProps {
@@ -33,7 +33,7 @@ const modalContent: ModalType = {
 
 export default function UserDropDown({ user, style }: UserDropDownProps) {
   const dispatch = useAppDispatch();
-
+  const history = useHistory();
   return (
     <>
       <Menu as="div" className="ml-3 relative z-10">
@@ -131,7 +131,8 @@ export default function UserDropDown({ user, style }: UserDropDownProps) {
       </Menu>
         <MyDialog
         okButtonClick={() => {
-          
+          localStorage.removeItem('token')
+          history.push('/login');
         }}
       />
       
