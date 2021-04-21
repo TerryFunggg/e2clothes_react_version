@@ -32,12 +32,12 @@ export default function MyDialog({ ...props }: DialogProps) {
             as={Fragment}
             enter="ease-out duration-300"
             enterFrom="opacity-0"
-            enterTo="opacity-100"
+            enterTo="opacity-50"
             leave="ease-in duration-200"
-            leaveFrom="opacity-100"
+            leaveFrom="opacity-50"
             leaveTo="opacity-0"
           >
-            <Dialog.Overlay className="fixed inset-0" />
+            <Dialog.Overlay className="fixed inset-0 bg-gray-200 opacity-60" />
           </Transition.Child>
 
           {/* This element is to trick the browser into centering the modal contents. */}
