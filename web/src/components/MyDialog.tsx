@@ -72,7 +72,7 @@ export default function MyDialog({ ...props }: DialogProps) {
                 <button
                   type="button"
                   className="dialog-confirm-btn"                  
-                  onClick={() => props.cancelButtonClick ? props.cancelButtonClick() : dispatch(hideModal())}
+                  onClick={() => props.okButtonClick ? props.okButtonClick() : dispatch(hideModal())}
                 >
                   {props.okButtonMessage || "Confirm"}
                 </button>
