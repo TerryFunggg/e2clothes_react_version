@@ -1,11 +1,12 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link,useHistory } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { setIsLogged, selectIsLogged } from '../reducers/isLogged'
 import { gql, useQuery } from '@apollo/client'
 import UserDropDown from './UserDropDown'
-import { Disclosure} from '@headlessui/react'
+import { Disclosure } from '@headlessui/react'
 import { ShoppingCartIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
+import MyDialog from './MyDialog'
 
 
 const ME_QUERY = gql`
@@ -29,10 +30,13 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
+
+
 // TODO: responsive for user dropdown menu
 export default function NavBar() {
   const isLoggedActive = useAppSelector(selectIsLogged)
   const dispatch = useAppDispatch();
+  const history = useHistory()
   const { loading, error, data } = useQuery(ME_QUERY)
 
   if (error) console.log(error)
@@ -65,7 +69,7 @@ export default function NavBar() {
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                          item.current ? 'bg-gray-900 text-white' : 'text-gray-600 hover:bg-gray-800 hover:text-white',
+                          item.current ? 'bg-green-700 text-white' : 'text-gray-600 hover:bg-green-600 hover:text-white',
                           'px-3 py-2 rounded-md text-sm font-medium'
                         )}
                         aria-current={item.current ? 'page' : undefined}
@@ -98,7 +102,7 @@ export default function NavBar() {
                   key={item.name}
                   href={item.href}
                   className={classNames(
-                    item.current ? 'bg-gray-900 text-white' : 'text-gray-600 hover:bg-gray-700 hover:text-white',
+                    item.current ? 'bg-green-800 text-white' : 'text-gray-600 hover:bg-green-700 hover:text-white',
                     'block px-3 py-2 rounded-md text-base font-medium'
                   )}
                   aria-current={item.current ? 'page' : undefined}
