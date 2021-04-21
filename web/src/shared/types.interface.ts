@@ -1,6 +1,23 @@
 export type Modal = {
-  title: string,
+  title?: string,
+  description?: string,
+  okButtonMessage?: string;
+  noButtonMessage?: string;
+  okButtonClick?: () => void;
+  cancelButtonClick?: () => void;
+}
+
+export interface DialogContent {
+  title:string,
   description: string,
+  onConfirm?: () => void,
+  onCancel?: () => void
+}
+
+export interface DialogInitial {
+  dialogIsActive: boolean,
+  handleDialog: (constent?: DialogContent | undefined) => void,
+  dialogContent: DialogContent
 }
 
 export interface LogInValues {

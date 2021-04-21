@@ -1,9 +1,7 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useContext} from "react";
 import { Link,useHistory } from "react-router-dom";
 import { Menu, Transition } from "@headlessui/react";
-import { useAppDispatch, useAppSelector } from '../../hooks'
-import { showModal} from '../../reducers/modalAction'
-import MyDialog from "../MyDialog";
+import {DialogContext} from '../MyDialog/MyDialogContext'
 
 // import types
 import {Modal as ModalType} from '../../shared/types.interface';
@@ -32,7 +30,7 @@ const modalContent: ModalType = {
 }
 
 export default function UserDropDown({ user, style }: UserDropDownProps) {
-  const dispatch = useAppDispatch();
+  const {handleDialog} = useContext(DialogContext)
   const history = useHistory();
   return (
     <>
@@ -118,7 +116,11 @@ export default function UserDropDown({ user, style }: UserDropDownProps) {
                         active ? "bg-gray-100" : "",
                         "block px-4 py-2 text-sm text-gray-700 cursor-pointer"
                       )}
-                      onClick={() => dispatch(showModal(modalContent))}
+                      onClick={() => handleDialog({
+                        title:"Logout",
+                        description:"Do you want to Logout?",
+                        onConfirm: () => {console.log("totototo")}
+                      })}
                     >
                       Sign out
                     </div>
@@ -128,14 +130,7 @@ export default function UserDropDown({ user, style }: UserDropDownProps) {
             </Transition>
           </>
         )}
-      </Menu>
-        <MyDialog
-        okButtonClick={() => {
-          localStorage.removeItem('token')
-          history.push('/login');
-        }}
-      />
-      
+      </Menu>      
     </>
   );
 }

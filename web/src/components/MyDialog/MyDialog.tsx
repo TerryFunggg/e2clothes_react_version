@@ -1,31 +1,23 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment} from "react";
-import { useAppDispatch, useAppSelector } from '../hooks'
-import { hideModal, selectModal,selectModalContent } from '../reducers/modalAction'
+import React, { Fragment } from "react";
+import ReactDOM from "react-dom";
+import { DialogContext } from "./MyDialogContext";
 
 
-
-type DialogProps = {
-  okButtonMessage?: string;
-  noButtonMessage?: string;
-  okButtonClick?: () => void;
-  cancelButtonClick?: () => void;
-};
-
-export default function MyDialog({ ...props }: DialogProps) {
-  const open = useAppSelector(selectModal)
-  const content = useAppSelector(selectModalContent)
-  const dispatch = useAppDispatch();
-
-  return (
-    <Transition show={open} as={Fragment}>
+const dialogRoot = document.getElementById("dialog-root") as HTMLElement;
+export default function MyDialog() {
+  const { dialogIsActive, handleDialog, dialogContent } = React.useContext(
+    DialogContext
+  );
+  return ReactDOM.createPortal(
+    <Transition show={dialogIsActive} as={Fragment}>
       <Dialog
         as="div"
         id="modal"
         className="fixed inset-0 z-10 overflow-y-auto"
         static
-        open={open}
-        onClose={() => dispatch(hideModal())}
+        open={dialogIsActive}
+        onClose={() => handleDialog()}
       >
         <div className="min-h-screen px-4 text-center">
           <Transition.Child
@@ -61,34 +53,37 @@ export default function MyDialog({ ...props }: DialogProps) {
                 as="h3"
                 className="text-lg md:text-3xl font-medium leading-6 text-gray-900"
               >
-                {content?.title}
+                {dialogContent.title}
               </Dialog.Title>
               <div className="mt-2">
-                <p className="text-sm md:text-lg text-gray-500">{content?.description}</p>
+                <p className="text-sm md:text-lg text-gray-500">                  
+                  {dialogContent.description}
+                </p>
               </div>
 
               <div className="mt-6 flex justify-between">
                 {/* Confirm button */}
                 <button
                   type="button"
-                  className="dialog-confirm-btn"                  
-                  onClick={() => props.okButtonClick ? props.okButtonClick() : dispatch(hideModal())}
+                  className="dialog-confirm-btn"
+                  onClick={() => dialogContent.onConfirm ? dialogContent.onConfirm() : {}}
                 >
-                  {props.okButtonMessage || "Confirm"}
+                  Confirm
                 </button>
                 {/* Cancel button */}
                 <button
                   type="button"
                   className="dialog-cancel-btn"
-                  onClick={() => props.cancelButtonClick ? props.cancelButtonClick() : dispatch(hideModal())}
+                  onClick={() => dialogContent.onCancel ? dialogContent.onCancel() : {}}
                 >
-                  {props.noButtonMessage || "Cancel"}
+                  Cancel
                 </button>
               </div>
             </div>
           </Transition.Child>
         </div>
       </Dialog>
-    </Transition>
+    </Transition>,
+    dialogRoot
   );
 }
