@@ -1,3 +1,8 @@
+export type Modal = {
+  title: string,
+  description: string,
+}
+
 export interface LogInValues {
   email: string,
   password: string,
