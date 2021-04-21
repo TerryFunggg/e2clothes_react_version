@@ -1,45 +1,42 @@
-import React from 'react'
-import { Link,useHistory } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from '../hooks'
-import { setIsLogged, selectIsLogged } from '../reducers/isLogged'
-import { gql, useQuery } from '@apollo/client'
-import UserDropDown from './UserDropDown'
-import { Disclosure } from '@headlessui/react'
-import { ShoppingCartIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
-import MyDialog from './MyDialog'
-
+import React from "react";
+import { Link, useHistory } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../hooks";
+import { setIsLogged, selectIsLogged } from "../reducers/isLogged";
+import { gql, useQuery } from "@apollo/client";
+import UserDropDown from "./UserDropDown";
+import { Disclosure } from "@headlessui/react";
+import { ShoppingCartIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
+import MyDialog from "./MyDialog";
 
 const ME_QUERY = gql`
-{
+  {
     me {
-        user_name
-        first_name
-        last_name
-        avatar
-        role
+      user_name
+      first_name
+      last_name
+      avatar
+      role
     }
-}
-`
+  }
+`;
 
 const navigation = [
-  { name: 'Home', href: '#', current: true },
-  { name: 'Market', href: '#', current: false },
-]
+  { name: "Home", href: "#", current: true },
+  { name: "Market", href: "#", current: false },
+];
 
 function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
-
-
 
 // TODO: responsive for user dropdown menu
 export default function NavBar() {
-  const isLoggedActive = useAppSelector(selectIsLogged)
+  const isLoggedActive = useAppSelector(selectIsLogged);
   const dispatch = useAppDispatch();
-  const history = useHistory()
-  const { loading, error, data } = useQuery(ME_QUERY)
+  const history = useHistory();
+  const { loading, error, data } = useQuery(ME_QUERY);
 
-  if (error) console.log(error)
+  if (error) console.log(error);
 
   return (
     <Disclosure as="nav" className="bg-white">
@@ -54,8 +51,8 @@ export default function NavBar() {
                   {open ? (
                     <XIcon className="block h-6 w-6" aria-hidden="true" />
                   ) : (
-                      <MenuIcon className="block h-6 w-6" aria-hidden="true" />
-                    )}
+                    <MenuIcon className="block h-6 w-6" aria-hidden="true" />
+                  )}
                 </Disclosure.Button>
               </div>
               <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
@@ -69,10 +66,12 @@ export default function NavBar() {
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                          item.current ? 'bg-green-700 text-white' : 'text-gray-600 hover:bg-green-600 hover:text-white',
-                          'px-3 py-2 rounded-md text-sm font-medium'
+                          item.current
+                            ? "bg-green-700 text-white"
+                            : "text-gray-600 hover:bg-green-600 hover:text-white",
+                          "px-3 py-2 rounded-md text-sm font-medium"
                         )}
-                        aria-current={item.current ? 'page' : undefined}
+                        aria-current={item.current ? "page" : undefined}
                       >
                         {item.name}
                       </a>
@@ -81,16 +80,32 @@ export default function NavBar() {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button className="p-1 rounded-full text-gray-400 hover:text-gray-800 focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                  <span className="sr-only">View Shop Cart</span>
-                  <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
-
                 {/* Profile dropdown */}
-                {data?.me ?
-                  <UserDropDown user={data.me} />
-                  : ''
-                }
+                {isLoggedActive && data?.me ? (
+                  <>
+                    <button className="p-1 rounded-full text-gray-400 hover:text-gray-800 focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                      <span className="sr-only">View Shop Cart</span>
+                      <ShoppingCartIcon
+                        className="h-6 w-6"
+                        aria-hidden="true"
+                      />
+                    </button>
+                    <UserDropDown user={data.me} />
+                  </>
+                ) : (
+                  <div className="hidden md:grid grid-cols-2 gap-2 ml-4">
+                    <a 
+                    href="/login"
+                    className="border-2 py-1 text-center px-4 border-gray-400 rounded-md hover:text-gray-600 transition ease-out duration-300">
+                      LogIn
+                    </a>
+                    <a 
+                    href="/signup"
+                    className="py-2 px-4 bg-green-700 text-white rounded-md hover:bg-green-600 transition ease-out duration-500">
+                      SignUp
+                    </a>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -102,20 +117,30 @@ export default function NavBar() {
                   key={item.name}
                   href={item.href}
                   className={classNames(
-                    item.current ? 'bg-green-800 text-white' : 'text-gray-600 hover:bg-green-700 hover:text-white',
-                    'block px-3 py-2 rounded-md text-base font-medium'
+                    item.current
+                      ? "bg-green-800 text-white"
+                      : "text-gray-600 hover:bg-green-700 hover:text-white",
+                    "block px-3 py-2 rounded-md text-base font-medium"
                   )}
-                  aria-current={item.current ? 'page' : undefined}
+                  aria-current={item.current ? "page" : undefined}
                 >
                   {item.name}
                 </a>
               ))}
+              <a href="/logIn"
+                className="text-gray-600 hover:bg-green-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+              >
+                LogIn
+              </a>
+              <a href="/signup"
+                className="text-gray-600 hover:bg-green-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+              >
+                SignUp
+              </a>
             </div>
           </Disclosure.Panel>
         </>
       )}
-
-
     </Disclosure>
   );
 }
