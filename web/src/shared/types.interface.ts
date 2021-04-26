@@ -1,3 +1,16 @@
+export type AlertColor = "blue" | "green" | "red" | "yellow";
+
+export interface AlertContent {
+  color: AlertColor;
+  message: string;
+}
+
+export interface AlertInitial {
+  alertIsActive: boolean,
+  handleAlert: (constent?: AlertContent) => void,
+  alertContent: AlertContent
+}
+
 export type Modal = {
   title?: string,
   description?: string,
@@ -6,6 +19,7 @@ export type Modal = {
   okButtonClick?: () => void;
   cancelButtonClick?: () => void;
 }
+
 
 export interface DialogContent {
   title:string,
