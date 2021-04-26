@@ -1,11 +1,10 @@
-import React, { Fragment, useState, useContext} from "react";
-import { Link,useHistory } from "react-router-dom";
+import React, { Fragment, useState, useContext } from "react";
+import { Link, useHistory } from "react-router-dom";
 import { Menu, Transition } from "@headlessui/react";
-import {DialogContext} from '../MyDialog/MyDialogContext'
+import { DialogContext } from "../MyDialog/MyDialogContext";
 
 // import types
-import {Modal as ModalType} from '../../shared/types.interface';
-
+import { Modal as ModalType } from "../../shared/types.interface";
 
 interface UserDropDownProps {
   user: User;
@@ -26,11 +25,11 @@ function classNames(...classes: string[]) {
 
 const modalContent: ModalType = {
   title: "Logout",
-  description:"Are your sure?"
-}
+  description: "Are your sure?",
+};
 
 export default function UserDropDown({ user, style }: UserDropDownProps) {
-  const {handleDialog} = useContext(DialogContext)
+  const { handleDialog } = useContext(DialogContext);
   const history = useHistory();
   return (
     <>
@@ -116,11 +115,16 @@ export default function UserDropDown({ user, style }: UserDropDownProps) {
                         active ? "bg-gray-100" : "",
                         "block px-4 py-2 text-sm text-gray-700 cursor-pointer"
                       )}
-                      onClick={() => handleDialog({
-                        title:"Logout",
-                        description:"Do you want to Logout?",
-                        onConfirm: () => {console.log("totototo")}
-                      })}
+                      onClick={() =>
+                        handleDialog({
+                          title: "Logout",
+                          description: "Do you want to Logout?",
+                          onConfirm: () => {
+                            localStorage.removeItem("token");
+                            history.push("/login");
+                          },
+                        })
+                      }
                     >
                       Sign out
                     </div>
@@ -130,7 +134,7 @@ export default function UserDropDown({ user, style }: UserDropDownProps) {
             </Transition>
           </>
         )}
-      </Menu>      
+      </Menu>
     </>
   );
 }

@@ -3,12 +3,20 @@ import React, { Fragment } from "react";
 import ReactDOM from "react-dom";
 import { DialogContext } from "./MyDialogContext";
 
-
 const dialogRoot = document.getElementById("dialog-root") as HTMLElement;
 export default function MyDialog() {
   const { dialogIsActive, handleDialog, dialogContent } = React.useContext(
     DialogContext
   );
+
+  /**
+     Call back function after onConfirm or onCancle
+  **/
+  const handleFn = (fn?: () => void) => {
+    if (fn) fn();
+    handleDialog();
+  };
+
   return ReactDOM.createPortal(
     <Transition show={dialogIsActive} as={Fragment}>
       <Dialog
@@ -56,7 +64,7 @@ export default function MyDialog() {
                 {dialogContent.title}
               </Dialog.Title>
               <div className="mt-2">
-                <p className="text-sm md:text-lg text-gray-500">                  
+                <p className="text-sm md:text-lg text-gray-500">
                   {dialogContent.description}
                 </p>
               </div>
@@ -66,7 +74,10 @@ export default function MyDialog() {
                 <button
                   type="button"
                   className="dialog-confirm-btn"
-                  onClick={() => dialogContent.onConfirm ? dialogContent.onConfirm() : {}}
+                  onClick={() => {
+                    if (dialogContent.onConfirm)
+                      handleFn(dialogContent.onConfirm);
+                  }}
                 >
                   Confirm
                 </button>
@@ -74,7 +85,10 @@ export default function MyDialog() {
                 <button
                   type="button"
                   className="dialog-cancel-btn"
-                  onClick={() => dialogContent.onCancel ? dialogContent.onCancel() : {}}
+                  onClick={() => {
+                    if (dialogContent.onCancel)
+                      handleFn(dialogContent.onCancel);
+                  }}
                 >
                   Cancel
                 </button>
