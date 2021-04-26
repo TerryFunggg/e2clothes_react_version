@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useMutation, useApolloClient } from "@apollo/client";
 import { useHistory } from "react-router-dom";
 import { FormikHelpers } from "formik";
 import validate from "./validate";
 import { LogInValues } from "../../shared/types.interface";
 import LogInForm from "./components/LoginForm";
+import { AlertContext } from "../../components/MyAlert/MyAlertContext";
 
 import { setIsLogged, selectIsLogged } from "../../reducers/isLogged";
 import { useAppDispatch, useAppSelector } from "../../hooks";
@@ -17,6 +18,7 @@ export default function LogIn() {
   const isLoggedSelector = useAppSelector(selectIsLogged);
   const dispatch = useAppDispatch();
   const client = useApolloClient();
+  const { handleAlert } = useContext(AlertContext);
   const history = useHistory();
 
   const initialValues: LogInValues = {
@@ -29,18 +31,22 @@ export default function LogIn() {
     { setSubmitting }: FormikHelpers<LogInValues>
   ) => {
     setSubmitting(true);
-    const response = await logIn({
-      variables: {
-        user: values,
-      },
-    });
-    localStorage.setItem("token", response.data.logIn);
-    dispatch(setIsLogged(true));
-    history.push("/");
+    try {
+      const response = await logIn({
+        variables: {
+          user: values,
+        },
+      });
+      localStorage.setItem("token", response.data.logIn);
+      dispatch(setIsLogged(true));
+      history.push("/");
+    } catch (e) {
+      handleAlert({ color: "red", message: e.message });
+    }
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">      
+    <div className="flex justify-center items-center h-screen">
       <div>
         <LogInForm
           initialValues={initialValues}
