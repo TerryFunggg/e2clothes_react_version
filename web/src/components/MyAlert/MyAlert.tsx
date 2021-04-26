@@ -7,12 +7,12 @@ export default function Alert() {
   const { alertContent, alertIsActive, handleAlert } = useContext(AlertContext);
   return ReactDOM.createPortal(
     <div
-      className={`absolute flex justify-center overflow-hidden bottom-10 w-screen z-20 ${
+      className={`absolute flex justify-center overflow-hidden bottom-0 w-screen z-20 ${
         alertIsActive ? "block" : "hidden"
       }`}
     >
       <div
-        className={`bg-${alertContent.color}-500 text-white m-10 px-6 py-4 border-0 rounded-xl relative  mb-4 alert `}
+        className={`bg-${alertContent.color}-500 text-white font-bold m-10 mb-20 px-6 py-4 border-0 rounded-2xl relative  mb-4 alert shadow-xl`}
       >
         <input type="checkbox" className="hidden" id="alert" />
         <span className="text-xl inline-block mr-5 align-middle">
