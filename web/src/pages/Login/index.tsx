@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { useMutation, useApolloClient } from "@apollo/client";
 import { useHistory } from "react-router-dom";
 import { FormikHelpers } from "formik";
-
-import validationSchema from "./loginValidationSchema";
+import validate from "./validate";
 import { LogInValues } from "../../shared/types.interface";
 import LogInForm from "./components/LoginForm";
 
@@ -45,7 +44,7 @@ export default function LogIn() {
       <div>
         <LogInForm
           initialValues={initialValues}
-          validationSchema={validationSchema}
+          validationSchema={validate}
           onSubmit={onSubmit}
         />
       </div>
