@@ -4,7 +4,7 @@ class ApplicationController < ActionController::API
 
   attr_reader :current_user
 
-  before_action :authorize_request
+  # before_action :authorize_request
 
   def total_count_header(count)
     response.headers['Access-Control-Expose-Headers'] = 'X-Total-Count'
