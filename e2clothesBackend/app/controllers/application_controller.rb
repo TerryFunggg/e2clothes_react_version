@@ -12,11 +12,21 @@ class ApplicationController < ActionController::API
   end
 
   private
-
   # check every request that included authorization header and token
   # and save it to :current_user
   def authorize_request
     requests = AuthorizeApiRequest.new(request.headers).call
     @current_user = requests[:user]
+  end
+
+  def current_user
+    token = check_header_have_auth
+    User.find(JsonWebToken.decode(token)[:user_id]) if token.present?
+  end
+
+  def check_header_have_auth
+    @headers = request.headers
+    # check authorization header
+    return @headers['Authorization'].to_s if @headers['Authorization'].present?
   end
 end
