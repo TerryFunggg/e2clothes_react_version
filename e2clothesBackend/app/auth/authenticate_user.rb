@@ -15,7 +15,7 @@ class AuthenticateUser
 
   def verify_user
     user = User.find_by(email: email)
-    return user if user && user.password_hash == password
+    return user if user.password == password
 
     raise(ExceptionHandler::AuthenticationError, Message.invalid_credentials)
   end
