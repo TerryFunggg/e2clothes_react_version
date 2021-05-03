@@ -2,24 +2,24 @@
 #
 # Table name: users
 #
-#  id         :bigint           not null, primary key
-#  avatar     :string(255)
-#  email      :string(255)      not null
-#  first_name :string(255)      not null
-#  is_active  :boolean          default(TRUE), not null
-#  last_name  :string(255)
-#  password   :string(255)      not null
-#  phone      :string(255)      not null
-#  role       :string(255)      default("buyer"), not null
-#  user_name  :string(255)      not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  address_id :bigint
+#  id            :bigint           not null, primary key
+#  avatar        :string(255)
+#  email         :string(255)      not null
+#  firstName     :string(255)      not null
+#  isActive      :boolean          default(TRUE), not null
+#  lastName      :string(255)
+#  password_hash :string(255)      not null
+#  phone         :string(255)      not null
+#  role          :string(255)      default("buyer"), not null
+#  userName      :string(255)      not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  address_id    :bigint
 #
 # Indexes
 #
-#  fk_rails_eb2fc738e4                           (address_id)
-#  index_users_on_user_name_and_email_and_phone  (user_name,email,phone) UNIQUE
+#  fk_rails_eb2fc738e4   (address_id)
+#  index_users_on_email  (email) UNIQUE
 #
 # Foreign Keys
 #
@@ -48,7 +48,7 @@ class User < ApplicationRecord
     admin: ADMIN
   }
 
-  validates :first_name, :last_name, :phone, :password, presence: true
+  validates :firstName, :lastName, :phone, :password, presence: true
   validates :phone, uniqueness: true,
                     length: { is: 8 },
                     numericality: true
@@ -67,18 +67,22 @@ class User < ApplicationRecord
   }
 
   before_save :ensure_email_downcase
-  before_save :ensure_password_hash
 
-  def password_hash
-    @password_hash ||= Password.new(password)
+  def password
+    @password ||= Password.new(password_hash)
+  end
+
+  def password=(new_password)
+    @password = Password.create(new_password)
+    self.password_hash = @password
   end
 
   def self.search(search)
     where(
       "id LIKE :q
-        OR user_name LIKE :q
-        OR first_name LIKE :q
-        OR last_name LIKE :q
+        OR userName LIKE :q
+        OR firstName LIKE :q
+        OR lastName LIKE :q
         OR email LIKE :q
         OR phone LIKE :q",
       q: "%#{search}%"
@@ -89,10 +93,5 @@ class User < ApplicationRecord
 
   def ensure_email_downcase
     self.email = email.downcase
-  end
-
-  def ensure_password_hash
-    @password_hash = Password.create(password)
-    self.password = @password_hash
   end
 end

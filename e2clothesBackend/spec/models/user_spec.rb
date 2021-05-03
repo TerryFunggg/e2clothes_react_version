@@ -2,24 +2,24 @@
 #
 # Table name: users
 #
-#  id         :bigint           not null, primary key
-#  avatar     :string(255)
-#  email      :string(255)      not null
-#  first_name :string(255)      not null
-#  is_active  :boolean          default(TRUE), not null
-#  last_name  :string(255)
-#  password   :string(255)      not null
-#  phone      :string(255)      not null
-#  role       :string(255)      default("buyer"), not null
-#  user_name  :string(255)      not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  address_id :bigint
+#  id            :bigint           not null, primary key
+#  avatar        :string(255)
+#  email         :string(255)      not null
+#  firstName     :string(255)      not null
+#  isActive      :boolean          default(TRUE), not null
+#  lastName      :string(255)
+#  password_hash :string(255)      not null
+#  phone         :string(255)      not null
+#  role          :string(255)      default("buyer"), not null
+#  userName      :string(255)      not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  address_id    :bigint
 #
 # Indexes
 #
-#  fk_rails_eb2fc738e4                           (address_id)
-#  index_users_on_user_name_and_email_and_phone  (user_name,email,phone) UNIQUE
+#  fk_rails_eb2fc738e4   (address_id)
+#  index_users_on_email  (email) UNIQUE
 #
 # Foreign Keys
 #

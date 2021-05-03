@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_14_052021) do
+ActiveRecord::Schema.define(version: 2021_05_03_135029) do
 
   create_table "addresses", charset: "utf8mb4", force: :cascade do |t|
     t.string "city", null: false
-    t.string "street_address", null: false
-    t.string "building_address", null: false
-    t.string "zip_code", null: false
+    t.string "streetAddress", null: false
+    t.string "buildingAddress", null: false
+    t.string "zipCode", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -52,9 +52,9 @@ ActiveRecord::Schema.define(version: 2021_04_14_052021) do
     t.string "state", null: false
     t.string "name", null: false
     t.string "city", null: false
-    t.string "street_address", null: false
-    t.string "building_address", null: false
-    t.string "zip_code", null: false
+    t.string "streetAddress", null: false
+    t.string "buildingAddress", null: false
+    t.string "zipCode", null: false
     t.string "phone", null: false
     t.string "email", null: false
     t.string "code"
@@ -78,7 +78,7 @@ ActiveRecord::Schema.define(version: 2021_04_14_052021) do
     t.string "price", null: false
     t.text "decription"
     t.bigint "quality", default: 0
-    t.boolean "is_active", default: true, null: false
+    t.boolean "isActive", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["shop_id"], name: "fk_rails_b169a26347"
@@ -126,20 +126,20 @@ ActiveRecord::Schema.define(version: 2021_04_14_052021) do
   end
 
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
-    t.string "user_name", null: false
-    t.string "first_name", null: false
-    t.string "last_name"
+    t.string "userName", null: false
+    t.string "firstName", null: false
+    t.string "lastName"
     t.string "email", null: false
-    t.string "password", null: false
+    t.string "password_hash", null: false
     t.string "avatar"
     t.string "phone", null: false
-    t.boolean "is_active", default: true, null: false
+    t.boolean "isActive", default: true, null: false
     t.string "role", default: "buyer", null: false
     t.bigint "address_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["address_id"], name: "fk_rails_eb2fc738e4"
-    t.index ["user_name", "email", "phone"], name: "index_users_on_user_name_and_email_and_phone", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   add_foreign_key "carts", "products"

@@ -4,7 +4,7 @@
 #
 #  id         :bigint           not null, primary key
 #  decription :text(65535)
-#  is_active  :boolean          default(TRUE), not null
+#  isActive   :boolean          default(TRUE), not null
 #  name       :string(255)      not null
 #  price      :string(255)      not null
 #  quality    :bigint           default(0)
