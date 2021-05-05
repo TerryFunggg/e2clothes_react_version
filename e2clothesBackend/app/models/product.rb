@@ -28,7 +28,7 @@ class Product < ApplicationRecord
 
   def self.search(search)
     where(
-      'name LIKE :q', q: "%#{search}%"
+      'name LIKE :q AND isActive = true AND quality > 0', q: "%#{search}%"
     )
   end
 end
