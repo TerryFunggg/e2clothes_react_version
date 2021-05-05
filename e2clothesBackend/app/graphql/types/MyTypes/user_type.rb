@@ -11,7 +11,7 @@ module Types
       field :phone, String, null: false
       field :isActive, Boolean, null: false
       field :role, String, null: false
-      field :address_id, Integer, null: true
+      field :address, Types::MyTypes::AddressType, null: true
       field :created_at, GraphQL::Types::ISO8601DateTime, null: false
       field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
     end
