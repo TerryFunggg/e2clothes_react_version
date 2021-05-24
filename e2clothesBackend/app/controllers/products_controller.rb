@@ -12,6 +12,8 @@ class ProductsController < ApplicationController
   # POST /products
   def create
     @product = Product.create!(product_params)
+    @product.images.attach(params[:images])
+    @product.save!
     json_response(@product, :created)
   end
 
@@ -36,7 +38,7 @@ class ProductsController < ApplicationController
 
   # white list
   def product_params
-    params.permit(:name, :price, :quality, :shop_id, :description, :is_active)
+    params.permit(:name, :price, :quality, :shop_id, :description, :is_active, images: [])
   end
 
   def set_product
