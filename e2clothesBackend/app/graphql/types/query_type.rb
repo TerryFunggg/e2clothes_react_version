@@ -6,8 +6,14 @@ module Types
 
     field :me, Types::MyTypes::UserType, null: true
 
-    field :product, [Types::MyTypes::ProductType], null: true do
+    field :users, [Types::MyTypes::UserType], null: true
+
+    field :search, [Types::MyTypes::ProductType], null: true do
       argument :search, String, required: true
+    end
+
+    field :product, Types::MyTypes::ProductType, null: true do
+      argument :id, ID, required: true
     end
 
     def me
@@ -15,8 +21,16 @@ module Types
       context[:me]
     end
 
+    def users
+      User.all
+    end
+
+    def product(id:)
+      Product.find(id)
+    end
+
     # Pagiation
-    def product(search:)
+    def search(search:)
       products = Product.search(search)
       if products.size > 0
         products
