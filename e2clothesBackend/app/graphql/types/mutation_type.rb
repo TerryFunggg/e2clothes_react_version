@@ -7,5 +7,6 @@ module Types
 
     field :sign_in_user, mutation: Mutations::SignInUser
     field :sign_up_user, mutation: Mutations::SignUpUser
+    field :add_to_cart, mutation: Mutations::AddToCart
   end
 end
