@@ -7,6 +7,9 @@ module Types
     field :me, Types::MyTypes::UserType, null: true
 
     field :users, [Types::MyTypes::UserType], null: true
+    field :user, Types::MyTypes::UserType, null: true do
+      argument :id, ID, required: true
+    end
 
     field :search, [Types::MyTypes::ProductType], null: true do
       argument :search, String, required: true
@@ -23,6 +26,10 @@ module Types
 
     def users
       User.all
+    end
+
+    def user(id:)
+      User.find(id)
     end
 
     def product(id:)
