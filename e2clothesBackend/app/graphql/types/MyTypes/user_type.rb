@@ -14,6 +14,16 @@ module Types
       field :address, Types::MyTypes::AddressType, null: true
       field :created_at, GraphQL::Types::ISO8601DateTime, null: false
       field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
+      field :numOfCart, Integer, null: true
+      field :cart, [Types::MyTypes::ProductType], null: true
+
+      def numOfCart
+        object.carts.count
+      end
+
+      def cart
+        object.cart_items
+      end
     end
   end
 end
