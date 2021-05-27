@@ -6,5 +6,6 @@ module Types
     field :remove_from_cart, mutation: Mutations::RemoveFromCart
     field :update_user_info, mutation: Mutations::UpdateUserInfo
     field :update_user_address, mutation: Mutations::UpdateUserAddress
+    field :check_out, mutation: Mutations::CheckOut
   end
 end
