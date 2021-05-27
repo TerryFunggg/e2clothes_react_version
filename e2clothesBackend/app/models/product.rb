@@ -33,4 +33,6 @@ class Product < ApplicationRecord
       'name LIKE :q AND isActive = true AND quality > 0', q: "%#{search}%"
     )
   end
+
+ self.per_page = 6
 end

@@ -11,8 +11,10 @@ module Types
       argument :id, ID, required: true
     end
 
-    field :search, [Types::MyTypes::ProductType], null: true do
+    field :search, Types::MyTypes::SearchType, null: true do
       argument :search, String, required: true
+      argument :page, Integer, required: false
+      argument :limit, Integer, 'set items per page' ,required: false
     end
 
     field :product, Types::MyTypes::ProductType, null: true do
@@ -45,10 +47,12 @@ module Types
     end
 
     # Pagiation
-    def search(search:)
-      products = Product.search(search)
-      if products.size > 0
-        products
+    def search(params)
+      p = Product.search(params[:search])
+      total = p.count
+      p = p.paginate(page: params[:page], per_page: params[:limit] ||= 6) if params[:page].present?
+      if p.size > 0
+        {products: p, page: params[:page], per: params[:limit] ||= 6, total: total }
       else
         []
       end
