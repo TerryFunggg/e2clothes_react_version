@@ -34,7 +34,7 @@ end
 50.times do |_index|
   Product.create(
     name: Faker::Coffee.blend_name,
-    price: Faker::Number.between(from: 1.0, to: 500.0),
+    price: Faker::Number.between(from: 1.0, to: 500.0).round(1),
     quality: Faker::Number.between(from: 1, to: 50),
     shop_id: rand(0..20),
     isActive: true
