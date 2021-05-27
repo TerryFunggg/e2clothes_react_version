@@ -26,8 +26,8 @@ module Types
         object.cart_items
       end
 
-      def order
-        object.order
+      def orders
+        object.orders
       end
     end
   end

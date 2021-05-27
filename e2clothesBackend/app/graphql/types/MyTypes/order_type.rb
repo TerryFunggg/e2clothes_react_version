@@ -14,6 +14,11 @@ module Types
       field :code, String, null: true
       field :created_at, GraphQL::Types::ISO8601DateTime, null: false
       field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
+      field :products,[Types::MyTypes::ProductType], null: true
+
+      def products
+        object.order_goods
+      end
     end
   end
 end

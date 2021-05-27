@@ -19,6 +19,10 @@ module Types
       argument :id, ID, required: true
     end
 
+    field :order, Types::MyTypes::OrderType, null: true do
+      argument :id, ID, required: true
+    end
+
     def me
       raise GraphQL::ExecutionError,"Authorization Token is required " if context[:me].nil?
       context[:me]
@@ -30,6 +34,10 @@ module Types
 
     def user(id:)
       User.find(id)
+    end
+
+    def order(id:)
+      Order.find(id)
     end
 
     def product(id:)
