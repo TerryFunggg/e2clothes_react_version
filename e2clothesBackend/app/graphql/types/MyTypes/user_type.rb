@@ -16,6 +16,7 @@ module Types
       field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
       field :numOfCart, Integer, null: true
       field :cart, [Types::MyTypes::ProductType], null: true
+      field :orders, [Types::MyTypes::OrderType], null: true
 
       def numOfCart
         object.carts.count
@@ -23,6 +24,10 @@ module Types
 
       def cart
         object.cart_items
+      end
+
+      def order
+        object.order
       end
     end
   end

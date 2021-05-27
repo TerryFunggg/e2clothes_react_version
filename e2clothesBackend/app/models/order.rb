@@ -26,6 +26,11 @@
 #
 class Order < ApplicationRecord
   belongs_to :user
+  has_many :order_products
+  has_many :order_goods,
+           class_name: 'Product',
+           through: :order_products,
+           source: :product
 
   STATE = [
     COMPLETE = 'complete'.freeze,
