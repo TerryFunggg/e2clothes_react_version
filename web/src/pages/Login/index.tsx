@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useMutation, useApolloClient } from "@apollo/client";
+import { gql, useMutation, useApolloClient } from "@apollo/client";
 import { useHistory } from "react-router-dom";
 import { FormikHelpers } from "formik";
 import validate from "./validate";
@@ -11,7 +11,15 @@ import { setIsLogged, selectIsLogged } from "../../reducers/isLogged";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 
 import { loader } from "graphql.macro";
-const LOGIN_MUTATION = loader("./login_mutation.graphql");
+//const LOGIN_MUTATION = loader("./login_mutation.graphql");
+
+const LOGIN_MUTATION = gql`
+  mutation($email: String!, $password: String!) {
+    signInUser(input: { email: $email, password: $password }) {
+      token
+    }
+  }
+`;
 
 export default function LogIn() {
   const [logIn, { loading, error }] = useMutation(LOGIN_MUTATION);
@@ -34,14 +42,20 @@ export default function LogIn() {
     try {
       const response = await logIn({
         variables: {
-          user: values,
+          email: values.email,
+          password: values.password,
         },
       });
-      localStorage.setItem("token", response.data.logIn);
+      console.log(response);
+      localStorage.setItem("token", response.data.signInUser.token);
       dispatch(setIsLogged(true));
       history.push("/");
     } catch (e) {
-      handleAlert({ color: "red", message: e.message });
+      console.log(e);
+      handleAlert({
+        color: "red",
+        message: "Please check your email or password",
+      });
     }
   };
 

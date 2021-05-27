@@ -1,3 +1,8 @@
-mutation logIn($user: LogInInput!){
-   logIn(user: $user)
+mutation($email: String!, $password: String!) {
+  signInUser(input: {
+    email: $email,
+    password: $password,
+  }){
+    token
+  }
 }

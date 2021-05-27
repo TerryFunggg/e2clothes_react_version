@@ -26,9 +26,6 @@ export default function IsAuthenticated({ children }: Props) {
   const { loading, error, data } = useQuery(ME_QUERY);
   const dispatch = useAppDispatch();
 
-  if (error || !data?.me) return <Redirect to={{ pathname: "/" }} />;
-  else {
-    dispatch(setIsLogged(true));
-    return <>{children}</>;
-  }
+  if (data) dispatch(setIsLogged(true));
+  return <>{children}</>;
 }

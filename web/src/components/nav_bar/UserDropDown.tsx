@@ -12,9 +12,9 @@ interface UserDropDownProps {
 }
 
 interface User {
-  user_name: string;
-  first_name: string;
-  last_name: string;
+  userName: string;
+  firstName: string;
+  lastName: string;
   avatar: string;
   role: string;
 }
@@ -33,7 +33,7 @@ export default function UserDropDown({ user, style }: UserDropDownProps) {
   const history = useHistory();
   return (
     <>
-      <Menu as="div" className="ml-3 relative z-10">
+      <Menu as="div" className="ml-3 relative z-20">
         {({ open }) => (
           <>
             <div>
@@ -62,7 +62,7 @@ export default function UserDropDown({ user, style }: UserDropDownProps) {
               >
                 <Menu.Item>
                   <a href="#" className="block px-4 py-2 text-sm text-gray-700">
-                    Hi, {user.user_name}
+                    Hi, {user.userName}
                   </a>
                 </Menu.Item>
                 <Menu.Item>
@@ -91,7 +91,21 @@ export default function UserDropDown({ user, style }: UserDropDownProps) {
                     </a>
                   )}
                 </Menu.Item>
-                {user.role === "buyer" ? (
+                {user.role === "seller" ? (
+                  <Menu.Item>
+                    {({ active }) => (
+                      <a
+                        href="#"
+                        className={classNames(
+                          active ? "bg-gray-100" : "",
+                          "block px-4 py-2 text-sm text-gray-700"
+                        )}
+                      >
+                        Your shop
+                      </a>
+                    )}
+                  </Menu.Item>
+                ) : (
                   <Menu.Item>
                     {({ active }) => (
                       <a
@@ -105,8 +119,6 @@ export default function UserDropDown({ user, style }: UserDropDownProps) {
                       </a>
                     )}
                   </Menu.Item>
-                ) : (
-                  ""
                 )}
                 <Menu.Item>
                   {({ active }) => (

@@ -10,9 +10,9 @@ import { ShoppingCartIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 const ME_QUERY = gql`
   {
     me {
-      user_name
-      first_name
-      last_name
+      userName
+      firstName
+      lastName
       avatar
       role
     }
@@ -93,14 +93,16 @@ export default function NavBar() {
                   </>
                 ) : (
                   <div className="hidden md:grid grid-cols-2 gap-2 ml-4">
-                    <a 
-                    href="/login"
-                    className="border-2 py-1 text-center px-4 border-gray-400 rounded-md hover:text-gray-600 transition ease-out duration-300">
+                    <a
+                      href="/login"
+                      className="border-2 py-1 text-center px-4 border-gray-400 rounded-md hover:text-gray-600 transition ease-out duration-300"
+                    >
                       LogIn
                     </a>
-                    <a 
-                    href="/signup"
-                    className="py-2 px-4 bg-green-700 text-white rounded-md hover:bg-green-600 transition ease-out duration-500">
+                    <a
+                      href="/signup"
+                      className="py-2 px-4 bg-green-700 text-white rounded-md hover:bg-green-600 transition ease-out duration-500"
+                    >
                       SignUp
                     </a>
                   </div>
@@ -126,12 +128,14 @@ export default function NavBar() {
                   {item.name}
                 </a>
               ))}
-              <a href="/logIn"
+              <a
+                href="/logIn"
                 className="text-gray-600 hover:bg-green-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
               >
                 LogIn
               </a>
-              <a href="/signup"
+              <a
+                href="/signup"
                 className="text-gray-600 hover:bg-green-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
               >
                 SignUp
