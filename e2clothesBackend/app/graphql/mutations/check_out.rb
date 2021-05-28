@@ -1,3 +1,4 @@
+ require 'securerandom'
 module Mutations
   class CheckOut < BaseMutation
     null true
@@ -19,6 +20,7 @@ module Mutations
         email: me.email,
         name: "#{me.firstName} #{me.lastName}",
         phone: me.phone,
+        code: SecureRandom.alphanumeric,
         city: me.address.city,
         buildingAddress: me.address.buildingAddress,
         streetAddress: me.address.streetAddress,
