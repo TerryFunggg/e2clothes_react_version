@@ -11,10 +11,13 @@ class ProductsController < ApplicationController
 
   # POST /products
   def create
-    @product = Product.create!(product_params)
-    @product.images.attach(params[:images])
+    me = current_user
+    product_params[:decription] = product_params[:description] unless product_params[:description].nil?
+    @product = Product.new(product_params)
+    @product.shop = me.shop
+    @product.image.attach(params[:image]) if params[:image]
     @product.save!
-    json_response(@product, :created)
+    json_response({ message: 'ok' }, :created)
   end
 
   # GET /products/:id
@@ -24,8 +27,9 @@ class ProductsController < ApplicationController
 
   # PUT /products/:id
   def update
+    product_params[:decription] = product_params[:description] unless product_params[:description].nil?
     @product.update(product_params)
-    head :no_content
+    json_response({ message: 'ok' }, :ok)
   end
 
   # DELETE /products/:id
@@ -38,7 +42,7 @@ class ProductsController < ApplicationController
 
   # white list
   def product_params
-    params.permit(:name, :price, :quality, :shop_id, :description, :is_active, images: [])
+    params.permit(:name, :price, :quality, :shop_id, :description, :decription, :is_active, :image)
   end
 
   def set_product

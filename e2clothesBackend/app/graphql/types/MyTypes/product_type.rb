@@ -9,7 +9,7 @@ module Types
       field :description, String, null: true
       field :quality, Integer, null: true
       field :isActive, Boolean, null: true
-      field :images, [String], null: true
+      field :image, String, null: true
       field :created_at, GraphQL::Types::ISO8601DateTime, null: true
       field :updated_at, GraphQL::Types::ISO8601DateTime, null: true
 
@@ -17,13 +17,8 @@ module Types
         object.decription
       end
 
-      def images
-        # return unless object.images.attached?
-        list = []
-        object.images.each do |img|
-          list << url_for(img)
-        end
-        list
+      def image
+          url_for(object.image) if object.image.attached?
       end
     end
   end

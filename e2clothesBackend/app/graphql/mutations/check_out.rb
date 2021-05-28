@@ -34,6 +34,8 @@ module Mutations
           price: product.price,
           order_id: order.id
         )
+        product.quality = product.quality - 1
+        product.save
       end
       # remove cart
       user_cart.delete_all

@@ -23,7 +23,7 @@
 class Product < ApplicationRecord
   belongs_to :shop
  # has_many :product_pictures
-  has_many_attached :images
+  has_one_attached :image
 
   validates :name, :price, presence: true
   validates :price, numericality: true

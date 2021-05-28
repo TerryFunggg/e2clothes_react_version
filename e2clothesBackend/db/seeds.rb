@@ -15,7 +15,7 @@ end
 
 100.times do
   Address.create(
-    city: Faker::Address.city,
+    city: ['nt','hki','kl','ot'].sample,
     buildingAddress: Faker::Address.building_number,
     streetAddress: Faker::Address.street_address,
     zipCode: Faker::Address.zip_code
@@ -23,20 +23,23 @@ end
 end
 
 20.times do |index|
-  Shop.create(
+  s = Shop.create(
     title: Faker::Company.name,
     state: %w[is_open unqualified is_close].sample.to_s,
     address: Address.find(index + 1),
     user: User.where('isActive', true)[index + 1]
   )
+  s.logo.attach(io: File.open('/home/terryfung/Downloads/logo.png'), filename: "logo.png")
 end
 
-50.times do |_index|
-  Product.create(
+50.times do |index|
+  p = Product.create(
     name: Faker::Coffee.blend_name,
+    decription: Faker::Lorem.paragraph_by_chars,
     price: Faker::Number.between(from: 1.0, to: 500.0).round(1),
     quality: Faker::Number.between(from: 1, to: 50),
     shop_id: rand(0..20),
     isActive: true
   )
+  p.image.attach(io: File.open("/home/terryfung/Downloads/e2clothes/#{rand(1...18)}.jpg"), filename: "#{rand(1..18)}.jpg")
 end

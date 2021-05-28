@@ -17,6 +17,7 @@ module Types
       field :numOfCart, Integer, null: true
       field :cart, [Types::MyTypes::ProductType], null: true
       field :orders, [Types::MyTypes::OrderType], null: true
+      field :shop, Types::MyTypes::ShopType, null: true
 
       def numOfCart
         object.carts.count
@@ -28,6 +29,10 @@ module Types
 
       def orders
         object.orders
+      end
+
+      def shop
+        object.shop
       end
     end
   end

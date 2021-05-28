@@ -21,13 +21,25 @@ module Types
       argument :id, ID, required: true
     end
 
+    field :recommend, [Types::MyTypes::ProductType], null: true do
+      argument :range, Integer, required: false
+    end
+
     field :order, Types::MyTypes::OrderType, null: true do
+      argument :id, ID, required: true
+    end
+
+    field :shop, Types::MyTypes::ShopType, null: true do
       argument :id, ID, required: true
     end
 
     def me
       raise GraphQL::ExecutionError,"Authorization Token is required " if context[:me].nil?
       context[:me]
+    end
+
+    def shop(id:)
+      Shop.find id
     end
 
     def users
@@ -44,6 +56,10 @@ module Types
 
     def product(id:)
       Product.find(id)
+    end
+
+    def recommend(range: 6)
+      Product.all.sample(range)
     end
 
     # Pagiation

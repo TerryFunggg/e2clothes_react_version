@@ -26,7 +26,9 @@
 class Shop < ApplicationRecord
   belongs_to :user
   belongs_to :address
+  has_many :products
   validates :title, :state, presence: true
+  has_one_attached :logo
 
   STATE = [
     UNQUALIFIED = 'UNQUALIFIED'.freeze,
@@ -40,8 +42,8 @@ class Shop < ApplicationRecord
     is_close: IS_CLOSE
   }
 
-  validates :logo, allow_blank: true, format: {
-    with: /\.gif|jpg|png/i,
-    message: 'must be a URL for GIF,JPG,PNG image'
-  }
+  # validates :logo, allow_blank: true, format: {
+  #   with: /\.gif|jpg|png/i,
+  #   message: 'must be a URL for GIF,JPG,PNG image'
+  # }
 end

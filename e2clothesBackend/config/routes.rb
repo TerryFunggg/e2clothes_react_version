@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   post '/login', to: 'authentication#authenticate'
   post '/signup', to: 'users#signup'
   post '/me', to: 'users#me'
+  post '/applyshop', to: 'shops#applyshop'
+  post '/updateshop', to: 'shops#updateshop'
+  post '/createproduct', to: 'products#create'
+  post '/modifyproduct', to: 'products#update'
   get '/dashboard/home', to: 'dashboard#index'
   resource :api do
     resources :users, :addresses, :carts, :rates, :traffics
