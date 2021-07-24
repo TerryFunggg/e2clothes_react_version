@@ -1,8 +1,8 @@
-e2clothes system(developing...)
+Note: This project is highly incompatible and uncompleted.
+
+e2clothes system sample(react version)
 
 React(Typescript) + Redux + GraphQL + Ruby on Rails + MySQL
-
-Start application
 
 ### Docker support 
 
